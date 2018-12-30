@@ -1,7 +1,21 @@
 {
   "name": "vue-calendar",
+  "author": "edisdev <hedis285@gmail.com>",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "datepicker",
+    "date-picker",
+    "calendar",
+    "component"
+  ],
+  "homepage": "https://github.com/edisdev/vue-datepicker-ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edisdev/vue-datepicker-ui.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
