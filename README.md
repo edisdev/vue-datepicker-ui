@@ -1,6 +1,6 @@
 # Vue Datepicker Component
   >A Datepicker Component For VueJs
-
+(https://edisdev.github.io/vue-datepicker-ui)
 <img src="./resources/rangePicker.gif" width="70%">
 <hr>
 <img src="./resources/rangepicker.png" width="100%"/>
@@ -34,6 +34,9 @@ disabled-start-date | Object . This object consists of the start and end informa
 disabled-end-date | Object . It has the same with disabled-start-end. (For range status of end Date. Ignored in single status.)
 text-format | String / Short And Long / Short and long formats of month and day names
 date-format | Object / This is the format in which the selected date will be displayed to the user. / default: { day: '2-digit', month: 'long', year: 'numeric' }
+
+
+DEMO (https://edisdev.github.io/vue-datepicker-ui)
 
 
 #### note:
