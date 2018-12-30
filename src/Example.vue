@@ -3,7 +3,7 @@
     <div class="titles">
       <h1>VUE DATEPCIKER COMPONENT</h1>
       <div class="using">
-        <div>
+        <div class="package">
           <span class="install">npm install vue-datepicker-ui</span> or 
           <span class="install">yarn add vue-datepicker-ui</span>
         </div>
@@ -148,12 +148,20 @@ export default {
   align-items: center;
   margin-top: 20px;
 }
+.titles .using .package {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
 .titles .using .install{
   font-size: 16px;
   background: #000;
   border-radius: 4px;
   color: #ffb00f;
   padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 30px;
 }
 .titles .using .code {
   background: #000;
@@ -162,11 +170,12 @@ export default {
   color: #1bba67;
   padding: 20px;
   font-size: 16px;
-  margin-top: 30px;
   border-radius: 4px;
   text-align: left;
-  max-width: 100%;
+  max-width: 94vw;
   word-break: break-all;
+  margin-left: auto;
+  margin-right: auto;
 }
 .examples {
   display: grid;
