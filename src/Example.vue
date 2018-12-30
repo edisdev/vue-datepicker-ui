@@ -4,8 +4,8 @@
       <h1>VUE DATEPCIKER COMPONENT</h1>
       <div class="using">
         <div>
-          <span class="install">npm install vue-datepicker-component</span> or 
-          <span class="install">yarn add vue-datepicker-component</span>
+          <span class="install">npm install vue-datepicker-ui</span> or 
+          <span class="install">yarn add vue-datepicker-ui</span>
         </div>
         <code class="code" v-html="exampleCode">
         </code>

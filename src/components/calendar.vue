@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import Calendar from "@/calendar";
+import Calendar from './datepicker'
 
 export default {
   name: 'VueDatePicker',
