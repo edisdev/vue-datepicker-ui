@@ -18,25 +18,27 @@
         </p>
       </div>
     </div>
-    <div class="example"
-    v-for="(example,index) in examples"
-    :key="index">
-      <h3>{{ example.title }}</h3>
-      <Calendar
-      v-model="example.value"
-      :range="example.range"
-      :lang="example.lang"
-      :firstDayOfWeek="example.firstDayOfWeek"
-      :input-class="example.inputClass"
-      :position="example.position"
-      :disabled-start-date="example.disabledStartDate"
-      :text-format="example.textFormat"
-      :date-format="example.dateFormat"
-      :disabled-end-date="example.disabledEndDate"/>
-      <blockquote class="exam-props">
-       <textarea :value="JSON.stringify(example, null, 2)" readonly>
-       </textarea>
-     </blockquote>
+    <div class="examples">
+      <div class="example"
+      v-for="(example,index) in examples"
+      :key="index">
+        <h3>{{ example.title }}</h3>
+        <Calendar
+        v-model="example.value"
+        :range="example.range"
+        :lang="example.lang"
+        :firstDayOfWeek="example.firstDayOfWeek"
+        :input-class="example.inputClass"
+        :position="example.position"
+        :disabled-start-date="example.disabledStartDate"
+        :text-format="example.textFormat"
+        :date-format="example.dateFormat"
+        :disabled-end-date="example.disabledEndDate"/>
+        <blockquote class="exam-props">
+        <textarea :value="JSON.stringify(example, null, 2)" readonly>
+          </textarea>
+        </blockquote>
+      </div>
     </div>
   </div>
 </template>
@@ -117,19 +119,17 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  width: 98vw;
-  padding-top: 50px;
-  padding-bottom: 200px;
   padding-left: 2vw;
   padding-right: 2vw;
-  flex-wrap: wrap;
+  padding-top: 50px;
+  padding-bottom: 200px;
 }
 .titles {
   width: 98vw;
   border-bottom: 1px solid #dedeee;
   padding-bottom: 20px;
   text-align: center;
+  height: 100%;
 }
 .titles .viewCode {
   margin-top: 10px;
@@ -156,7 +156,6 @@ export default {
   padding: 10px;
 }
 .titles .using .code {
-  width: 40%;
   background: #000;
   display: block;
   align-self: center;
@@ -166,15 +165,20 @@ export default {
   margin-top: 30px;
   border-radius: 4px;
   text-align: left;
+  max-width: 100%;
+  word-break: break-all;
 }
-
+.examples {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+}
 .example {
-  padding-left: 3vw;
-  min-width: 30vw;
-  padding-top: 30px;
+  padding: 3vw;
   border-bottom: 1px solid #eaeaeb;
+  max-width: 100%;
 }
-.example:nth-child(3n-1) , .example:nth-child(3n) {
+.example:nth-child(3n-1) , .example:nth-child(3n+1) {
   border-right: 1px solid #eaeaeb;
 }
 .example  h3 {
@@ -187,11 +191,12 @@ export default {
 
 .example .exam-props textarea{
   margin-top: 20px;
-  height: 200px;
+  height: 220px;
   padding: 7px;
   border-radius: 6px;
   border-color: #eaeaeb;
   resize: none;
   width: 95%;
+  font-size: 13px;
 }
 </style>
