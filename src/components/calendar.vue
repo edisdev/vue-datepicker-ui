@@ -333,11 +333,13 @@ export default {
   font-size: 1em;
   margin-right: 10px;
   margin-left: 10px;
+  background: transparent;
 }
 
 .v-calendar .calendar .selected-field .prevDateButton, .v-calendar .calendar .selected-field .nextDateButton {
   position: relative;
   border: 0;
+  background: transparent;
 }
 .v-calendar .calendar .selected-field .prevDateButton::after, .v-calendar .calendar .selected-field .nextDateButton::after {
   content: "";
