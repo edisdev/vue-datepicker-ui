@@ -266,7 +266,7 @@ export default {
 
 .v-calendar .content {
   display: flex;
-  box-shadow: 0 20px 30px 0 rgba(234, 234, 235, .7);
+  box-shadow: 0 20px 30px 0 rgba(0, 0, 0, .2);
   border: 1px solid #eaeaeb;
   position: absolute;
   background: #fff;
@@ -417,7 +417,7 @@ export default {
 .v-calendar.top .content {
   top: 100%;
   transform: translateY(calc(-100% - 66px));
-  box-shadow: 3px -14px 30px 0px rgba(234, 234, 235, .7);
+  box-shadow: 3px -14px 30px 0px rgba(0, 0, 0, .2);
 }
 .v-calendar.top .content .calendar:first-child::before {
   border-width: 10px;
