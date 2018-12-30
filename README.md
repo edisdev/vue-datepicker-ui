@@ -1,9 +1,11 @@
 # Vue Datepicker Component
   >A Datepicker Component For VueJs
 
+<img src="./resources/rangePicker.gif">
+
 <img src="./resources/rangepicker.png" />
 <img src="./resources/singlepicker.png">
-<img src="./resources/rangePicker.gif">
+
 ### Props
 ``` html
    <Calendar 
