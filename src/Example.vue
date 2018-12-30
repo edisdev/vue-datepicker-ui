@@ -71,10 +71,17 @@ export default {
           value: [new Date(), new Date(new Date().getTime() + ( 9 * 24 * 60 * 60 * 1000))],
           firstDayOfWeek: 'monday'
         },
-        { title: 'Custom lang, First day of week',
+        { title: 'Custom lang',
           inputClass: 'exampleDatePicker',
           lang: 'en',
           position: 'right',
+          range: true,
+          value: [new Date(), new Date(new Date().getTime() + ( 9 * 24 * 60 * 60 * 1000))]
+        },
+        { title: 'First Day Of Week',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'left',
           range: true,
           value: [new Date(), new Date(new Date().getTime() + ( 9 * 24 * 60 * 60 * 1000))],
           firstDayOfWeek: 'sunday'
@@ -92,14 +99,14 @@ export default {
         { title: 'Date Options String',
           inputClass: 'exampleDatePicker',
           lang: 'en',
-          position: 'left',
+          position: 'right',
           textFormat: 'long',
           value: new Date()
         },
         { title: 'Showed Date Format',
           inputClass: 'exampleDatePicker',
           lang: 'en',
-          position: 'right',
+          position: 'left',
           value: new Date(),
           dateFormat: {day: '2-digit', month: '2-digit', year: 'numeric'}
         },
@@ -123,6 +130,7 @@ export default {
   padding-right: 2vw;
   padding-top: 50px;
   padding-bottom: 200px;
+  background: #b1b8be73;
 }
 .titles {
   width: 98vw;
@@ -180,7 +188,7 @@ export default {
 .examples {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px,1fr));
 }
 .example {
   padding: 3vw;
