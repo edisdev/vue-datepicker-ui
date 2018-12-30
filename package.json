@@ -3,6 +3,7 @@
   "author": "edisdev <hedis285@gmail.com>",
   "version": "0.1.0",
   "private": false,
+  "main": "./src/vue-datepicker.js",
   "license": "MIT",
   "keywords": [
     "vue",
