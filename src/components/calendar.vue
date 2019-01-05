@@ -124,7 +124,8 @@ export default {
     },
     firstDayOfWeek: {
       type: String,
-      default: 'monday' // monday or sunday
+      validator: val => ['monday', 'sunday'].contains(val),
+      default: 'monday'
     },
     disabledStartDate: {
       type: Object,
