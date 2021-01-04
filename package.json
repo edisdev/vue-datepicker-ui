@@ -57,5 +57,8 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "dependencies": {
+    "calendar-data-generate": "^1.0.3"
+  }
 }
