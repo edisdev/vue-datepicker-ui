@@ -1,7 +1,7 @@
 {
   "name": "vue-datepicker-ui",
-  "author": "edisdev <hedis285@gmail.com>",
-  "version": "0.1.2",
+  "author": "edisdev <edisdev14@gmail.com>",
+  "version": "0.1.3",
   "private": false,
   "main": "./src/components/calendar.vue",
   "license": "MIT",
