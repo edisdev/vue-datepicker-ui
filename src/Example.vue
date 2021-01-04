@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="titles">
-      <h1>VUE DATEPCIKER COMPONENT</h1>
+      <h1>VUE DATEPICKER COMPONENT</h1>
       <div class="using">
         <div class="package">
           <span class="install">npm install vue-datepicker-ui</span> or 
@@ -33,7 +33,8 @@
         :disabled-start-date="example.disabledStartDate"
         :text-format="example.textFormat"
         :date-format="example.dateFormat"
-        :disabled-end-date="example.disabledEndDate"/>
+        :disabled-end-date="example.disabledEndDate"
+        :disabled="example.disabled || false"/>
         <blockquote class="exam-props">
         <textarea :value="JSON.stringify(example, null, 2)" readonly>
           </textarea>
@@ -60,7 +61,7 @@ export default {
           lang: 'tr',
           position: 'bottom',
           range: false,
-          value: new Date(),
+          value: null,
           firstDayOfWeek: 'monday'
         },
         { title: 'Range',
@@ -68,7 +69,7 @@ export default {
           lang: 'tr',
           position: 'bottom',
           range: true,
-          value: [new Date(), new Date(new Date().getTime() + ( 9 * 24 * 60 * 60 * 1000))],
+          value: [null, null],
           firstDayOfWeek: 'monday'
         },
         { title: 'Custom lang',
@@ -110,6 +111,14 @@ export default {
           value: new Date(),
           dateFormat: {day: '2-digit', month: '2-digit', year: 'numeric'}
         },
+        { title: 'Disabled Open Picker',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'left',
+          value: new Date(),
+          disabled: true,
+          dateFormat: {day: '2-digit', month: '2-digit', year: 'numeric'}
+        }
       ]
     }
   }

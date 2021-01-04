@@ -1,17 +1,16 @@
 <template>
   <section class="v-calendar" :class="[position, {'long': range}]">
     <div class="input-field" :class="{'long': range}">
-      <svg class="datepicker" version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-        <title>calendar</title>
-        <path
-          d="M10 12h4v4h-4zM16 12h4v4h-4zM22 12h4v4h-4zM4 24h4v4h-4zM10 24h4v4h-4zM16 24h4v4h-4zM10 18h4v4h-4zM16 18h4v4h-4zM22 18h4v4h-4zM4 18h4v4h-4zM26 0v2h-4v-2h-14v2h-4v-2h-4v32h30v-32h-4zM28 30h-26v-22h26v22z"
-        ></path>
-      </svg>
       <input
       type="text" 
       :class="[inputClass]" 
+      :placeholder="placeholder"
       @click="isShowPicker= !isShowPicker"
+      :disabled="disabled"
       :value="formattedValue" readonly/>
+      <svg class="datepicker" version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+        <path d="M10 12h4v4h-4zM16 12h4v4h-4zM22 12h4v4h-4zM4 24h4v4h-4zM10 24h4v4h-4zM16 24h4v4h-4zM10 18h4v4h-4zM16 18h4v4h-4zM22 18h4v4h-4zM4 18h4v4h-4zM26 0v2h-4v-2h-14v2h-4v-2h-4v32h30v-32h-4zM28 30h-26v-22h26v22z"></path>
+      </svg>
     </div>
     <div class="content"
      v-if="isShowPicker">
@@ -69,19 +68,18 @@
 </template>
 
 <script>
-import Calendar from './datepicker'
+import Calendar from 'calendar-data-generate'
 
 export default {
   name: 'VueDatePicker',
   data() {
     return {
-      calendarWiew: 'day',
       isShowPicker: false,
       currentDate: {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         date: new Date().getDate(),
-        firstDayOfWeek: this.firstDayOfWeek,
+        firstDayOfWeek: this.firstDayOfWeek
       },
       currentDateEnd: {
         year: new Date().getFullYear(),
@@ -89,26 +87,34 @@ export default {
         date: new Date().getDate(),
         firstDayOfWeek: this.firstDayOfWeek
       },
-      selectedDate: this.range ? [null, null] : null
+      selectedDate: this.range ? [null, null] : null,
+      calendarView: 'days',
+      calendarEndView: 'days'
     }
   },
   props: {
+    value: {},
     textFormat: {
       type: String,
       default: 'short'
     },
     dateFormat: {
       type: Object,
-      default: function() {
-        return { day: '2-digit', month: 'long', year: 'numeric' }
-      },
+      default: () => {
+        return { day: '2-digit', month: 'short', year: 'numeric' }
+      }
+    },
+    format: {
+      type: String,
+      default: ''
+    },
+    rangeSeperator: {
+      type: String,
+      default: '~'
     },
     position: {
       type: String,
       default: 'left'
-    },
-    value: {
-      type: [Array, String, Date]
     },
     range: {
       type: Boolean,
@@ -124,7 +130,7 @@ export default {
     },
     firstDayOfWeek: {
       type: String,
-      validator: val => ['monday', 'sunday'].contains(val),
+      validator: val => ['monday', 'sunday'].indexOf(val) > -1,
       default: 'monday'
     },
     disabledStartDate: {
@@ -144,11 +150,19 @@ export default {
           to: null
         }
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    placeholder: {
+      type: String,
+      default: 'Select Date'
     }
   },
   computed: {
-    disabledStartDateCalc() {
-      let unSelectedDate = {
+    disabledStartDateCalc () {
+      const unSelectedDate = {
         from: null,
         to: null
       }
@@ -161,13 +175,13 @@ export default {
       return unSelectedDate
     },
     disabledEndDateCalc() {
-      let unSelectedDate = {
+      const unSelectedDate = {
         from: null,
         to: null
       }
       if (this.range) {
         let disabledDate = new Date(this.selectedDate[0])
-        disabledDate = (!this.disabledEndDate.to || disabledDate.getTime() > this.disabledStartDate.to.getTime()) ? disabledDate : this.disabledStartDate.from
+        disabledDate = (!this.disabledEndDate.to || disabledDate.getTime() > this.disabledEndDate.to.getTime()) ? disabledDate : this.disabledEndDate.to
         unSelectedDate.to = disabledDate
         unSelectedDate.from = this.disabledEndDate.from
       }
@@ -189,63 +203,98 @@ export default {
         this.lang,
         this.textFormat,
         { ...this.dateFormat },
-       this.range ? this.disabledEndDateCalc : this.disabledEndDate
+        this.disabledEndDateCalc
       )
     },
-    formattedValue() {
+    formattedValue () {
       if (!this.range) {
         return this.formatDate(this.selectedDate)
-      }
-      return `${this.formatDate(this.selectedDate[0])} ~ ${this.formatDate(this.selectedDate[1])}`
+      } else if (this.selectedDate.filter(Boolean).length != 2) return null
+      return `${this.formatDate(this.selectedDate[0])} ${this.rangeSeperator} ${this.formatDate(this.selectedDate[1])}`
     }
   },
   methods: {
     formatDate(value) {
-      return new Date(value).toLocaleDateString(this.lang, { ...this.dateFormat })
+      if (!value) return null
+      if (this.range && this.value.filter(Boolean).length === 0 ) return null
+      return new Date(value).toLocaleDateString(this.locale, { ...this.dateFormat })
     },
-    prevMount(type) {
-      const currentDate = type === 'start' ? this.currentDate : this.currentDateEnd
+    prevMount(picker) {
+      const currentDate = picker === 'start' ? this.currentDate : this.currentDateEnd
       currentDate.month = currentDate.month - 1
       if (currentDate.month === -1) {
         currentDate.year = currentDate.year - 1
         currentDate.month = 11
       }
     },
-    nextMount(type) {
-      const currentDate = type === 'start' ? this.currentDate : this.currentDateEnd
+    nextMount(picker) {
+      const currentDate = picker === 'start' ? this.currentDate : this.currentDateEnd
       currentDate.month = currentDate.month + 1
       if (currentDate.month === 12) {
         currentDate.year = currentDate.year + 1
         currentDate.month = 0
       }
     },
-    handlerDate(fullDate, type = null) {
+    handlerDate(fullDate, picker = null) {
       if (!this.range) {
         this.setDate(fullDate)
         return
       }
       const selectedDates = [
-        type === 'start' ? fullDate : this.selectedDate[0],
-        type === 'end' ? fullDate : this.selectedDate[1]
+        picker === 'start' ? fullDate : this.selectedDate[0],
+        picker === 'end' ? fullDate : this.selectedDate[1]
       ]
       this.setDate(selectedDates)
     },
     setDate(selectedDates) {
-      this.$emit('input', selectedDates)
       this.selectedDate = selectedDates
+      this.emitInputAction()
     },
-    isInSelectedDate(date) {
+    emitInputAction () {
+      this.$emit('input', this.selectedDate)
+      this.close()
+    },
+    isInSelectedDate (date) {
+      if (!this.range) return null
       return new Date(this.selectedDate[0]).getTime() <= date.getTime() && new Date(this.selectedDate[1]).getTime() >= date.getTime()
     },
-    changeView(view) {
-      this.calendarWiew = view
+    close () {
+      this.isShowPicker = false
+    },
+    setCurrents () {
+      if (this.range) {
+        if (this.value[0]) {
+          this.currentDate.year = new Date(this.value[0]).getFullYear()
+          this.currentDate.month = new Date(this.value[0]).getMonth()
+          this.currentDate.date = new Date(this.value[0]).getDate()
+        }
+        if (this.value[1]) {
+          this.currentDateEnd.year = new Date(this.value[1]).getFullYear()
+          this.currentDateEnd.month = new Date(this.value[1]).getMonth()
+          this.currentDateEnd.date = new Date(this.value[1]).getDate()
+        }
+      } else if (this.value) {
+        this.currentDate.year = new Date(this.value).getFullYear()
+        this.currentDate.month = new Date(this.value).getMonth()
+        this.currentDate.date = new Date(this.value).getDate()
+      }
     }
   },
-  mounted() {
+  mounted () {
+    this.setCurrents()
     this.setDate(this.value)
+    this.$watch('value', () => {
+      this.setCurrents()
+      this.setDate(this.value)
+    })
+    this.$watch('selectedDate', (value) => {
+      if (!value && this.value === value) return
+      this.$emit('change', value)
+    })
     window.addEventListener('click', (e) => {
-      const el = e.target.closest('.v-calendar')
-      if (!el) this.isShowPicker = false
+      const Datepicker = this.$el
+      const isThis = Datepicker.contains(e.target)
+      if (!isThis) this.close()
     })
   }
 }
@@ -279,9 +328,15 @@ export default {
   position: relative;
   min-width: 140px;
 }
+
+.v-calendar .input-field input:disabled ~ svg {
+  fill: #7b8187;
+}
+
 .v-calendar .input-field.long {
   min-width: 290px;
 }
+
 .v-calendar .input-field input {
   padding-left: 40px;
   padding-right: 20px;
@@ -304,8 +359,10 @@ export default {
 }
 .v-calendar .calendar {
   padding: 20px;
-  width: 300px;
+  width: max-content;
+
 }
+
 .v-calendar .calendar.textLong {
   width: 580px;
 }
@@ -357,14 +414,14 @@ export default {
 }
 .v-calendar .calendar .days {
   display: grid;
-  grid-template-columns: repeat(7, calc(100%/7));
+  grid-template-columns: repeat(7, minmax(max-content, 1fr));
   border-radius: 6px;
 }
 .v-calendar .calendar .days .day {
   background: transparent;
   border: 0;
   text-align: center;
-  padding: 10px;
+  padding: 7px;
   font-size: 0.8em;
   color: #7b8187;
   cursor: pointer;
