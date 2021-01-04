@@ -167,7 +167,8 @@ export default {
         to: null
       }
       if (this.range) {
-        let disabledDate = new Date(this.selectedDate[1])
+        let endDate = this.selectedDate[1]
+        let disabledDate = endDate ? new Date(endDate) : null
         disabledDate = (!this.disabledStartDate.from || disabledDate.getTime() < this.disabledStartDate.from.getTime()) ? disabledDate : this.disabledStartDate.from
         unSelectedDate.from = disabledDate
         unSelectedDate.to = this.disabledStartDate.from
@@ -209,7 +210,8 @@ export default {
     formattedValue () {
       if (!this.range) {
         return this.formatDate(this.selectedDate)
-      } else if (this.selectedDate.filter(Boolean).length != 2) return null
+      }
+      else if (this.selectedDate.filter(Boolean).length != 2) return null
       return `${this.formatDate(this.selectedDate[0])} ${this.rangeSeperator} ${this.formatDate(this.selectedDate[1])}`
     }
   },
@@ -217,7 +219,7 @@ export default {
     formatDate(value) {
       if (!value) return null
       if (this.range && this.value.filter(Boolean).length === 0 ) return null
-      return new Date(value).toLocaleDateString(this.locale, { ...this.dateFormat })
+      return new Date(value).toLocaleDateString(this.lang, { ...this.dateFormat })
     },
     prevMount(picker) {
       const currentDate = picker === 'start' ? this.currentDate : this.currentDateEnd
@@ -252,7 +254,11 @@ export default {
     },
     emitInputAction () {
       this.$emit('input', this.selectedDate)
-      this.close()
+      if (this.range) {
+        if (this.selectedDate.filter(Boolean).length === 2) this.close()
+      } else {
+        this.close()
+      }
     },
     isInSelectedDate (date) {
       if (!this.range) return null
