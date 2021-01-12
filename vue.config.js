@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: "/vue-datepicker-ui/"
+  publicPath: process.env.NODE_ENV === 'production' ? '/vue-datepicker-ui' : '/'
 }
