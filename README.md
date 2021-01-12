@@ -20,7 +20,10 @@
     :disabled-start-date="" 
     :disabled-end-date=""
     :text-format="" 
-    :date-format=""/>
+    :date-format=""
+    :disabled=""
+    :placeholder=""
+    :circle=""/>
 ```
 
 Prop | Value
