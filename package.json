@@ -36,7 +36,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
@@ -63,6 +63,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "calendar-data-generate": "^1.0.3"
+    "calendar-data-generate": "^1.0.3",
+    "vue": "^2.6.14"
   }
 }
