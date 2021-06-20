@@ -1,5 +1,7 @@
 /resources
 /docs
+/development
+/public
 
 /yarn.lock
 
