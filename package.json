@@ -1,7 +1,7 @@
 {
   "name": "vue-datepicker-ui",
   "author": "edisdev <edisdev14@gmail.com>",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "private": false,
   "main": "./lib/vuedatepickerui.umd.js",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "deploy": "vue-cli-service build --dest ./docs"
   },
   "peerDependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.6.14"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",
@@ -63,7 +63,6 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "calendar-data-generate": "^1.0.3",
-    "vue": "^2.6.14"
+    "calendar-data-generate": "^1.0.3"
   }
 }
