@@ -4,7 +4,7 @@ module.exports = {
   devServer: {
     port: 1903
   },
-  publicPath: IS_PROD ? '/vue-datepicker-ui' : '/',
+  publicPath: IS_PROD ? '/vue-datepicker-ui/' : '/',
   pages: {
     index: {
       // entry for the page
