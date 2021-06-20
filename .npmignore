@@ -2,10 +2,16 @@
 /docs
 /development
 /public
+/.github
 
 /yarn.lock
+/package-lock.json
 
 /lib/demo.html
 
+
+## config files
+editorconfig
 vue.config.js
 babel.config.js
+jest.config.js
