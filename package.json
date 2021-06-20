@@ -5,6 +5,7 @@
   "private": false,
   "main": "./lib/vuedatepickerui.umd.js",
   "license": "MIT",
+  "description": "A Datepicker Component For Vue",
   "keywords": [
     "vue",
     "datepicker",
