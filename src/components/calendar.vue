@@ -173,7 +173,7 @@ export default {
         if (this.range) {
           disable = (!!this.disableDate.to &&
              endDate.getMonth() > m.index &&
-             endDate.getFullYear() <= year) ||
+             endDate.getFullYear() >= year) ||
            (!!this.disableDate.from &&
              startDate.getMonth() > m.index &&
              startDate.getFullYear() <= year);
