@@ -6,7 +6,6 @@ module.exports = {
   },
   publicPath: IS_PROD ? '/vue-datepicker-ui' : '/',
   assetsDir: IS_PROD ? './' : '',
-  productionSourceMap: false,
   pages: {
     index: {
       // entry for the page

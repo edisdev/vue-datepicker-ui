@@ -138,3 +138,23 @@ DEMO (https://edisdev.github.io/vue-datepicker-ui)
 
 #### note:
  **date-format** object values is consists to toLocaleString in js. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
+
+
+### Development:
+
+Firstly
+
+```bash
+  yarn add vue
+```
+
+Because, Vue is peer dependency.
+Then,
+
+```bash
+  yarn install
+```
+
+```bash
+  yarn serve
+```
