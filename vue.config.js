@@ -5,7 +5,8 @@ module.exports = {
     port: 1903
   },
   publicPath: IS_PROD ? '/vue-datepicker-ui/' : '/',
-  assetsDir: IS_PROD ? './' : '',
+  productionSourceMap: false,
+  filenameHashing: false,
   pages: {
     index: {
       // entry for the page
