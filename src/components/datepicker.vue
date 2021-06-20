@@ -73,199 +73,199 @@
 </template>
 
 <script>
-import Calendar from "calendar-data-generate";
+import Calendar from 'calendar-data-generate'
 
-import CalendarUI from "./calendar";
+import CalendarUI from './calendar'
 
 export default {
-  name: "VueDatePicker",
+  name: 'VueDatePicker',
   components: { CalendarUI },
-  data() {
+  data () {
     return {
       isShowPicker: false,
       currentDate: {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         date: new Date().getDate(),
-        firstDayOfWeek: this.firstDayOfWeek,
+        firstDayOfWeek: this.firstDayOfWeek
       },
       currentDateEnd: {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         date: new Date().getDate(),
-        firstDayOfWeek: this.firstDayOfWeek,
+        firstDayOfWeek: this.firstDayOfWeek
       },
       selectedDate: this.range ? [null, null] : null,
-      calendarView: "days",
-      calendarEndView: "days",
-    };
+      calendarView: 'days',
+      calendarEndView: 'days'
+    }
   },
   props: {
     value: {},
     textFormat: {
       type: String,
-      default: "short",
+      default: 'short'
     },
     dateFormat: {
       type: Object,
       default: () => {
-        return { day: "2-digit", month: "short", year: "numeric" };
-      },
+        return { day: '2-digit', month: 'short', year: 'numeric' }
+      }
     },
     format: {
       type: String,
-      default: "",
+      default: ''
     },
     rangeSeperator: {
       type: String,
-      default: "~",
+      default: '~'
     },
     position: {
       type: String,
-      default: "left",
+      default: 'left'
     },
     range: {
       type: Boolean,
-      default: false,
+      default: false
     },
     lang: {
       type: String,
-      default: "tr",
+      default: 'tr'
     },
     inputClass: {
       type: String,
-      default: "",
+      default: ''
     },
     firstDayOfWeek: {
       type: String,
-      validator: (val) => ["monday", "sunday"].indexOf(val) > -1,
-      default: "monday",
+      validator: (val) => ['monday', 'sunday'].indexOf(val) > -1,
+      default: 'monday'
     },
     disabledStartDate: {
       type: Object,
-      default() {
+      default () {
         return {
           from: null,
-          to: null,
-        };
-      },
+          to: null
+        }
+      }
     },
     disabledEndDate: {
       type: Object,
-      default() {
+      default () {
         return {
           from: null,
-          to: null,
-        };
-      },
+          to: null
+        }
+      }
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     placeholder: {
       type: String,
-      default: "Select Date",
+      default: 'Select Date'
     },
     circle: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   computed: {
-    disabledStartDateCalc() {
+    disabledStartDateCalc () {
       const unSelectedDate = {
         from: null,
-        to: null,
-      };
+        to: null
+      }
       if (this.range) {
-        let endDate = this.selectedDate[1];
-        let disabledDate = endDate ? new Date(endDate) : null;
+        const endDate = this.selectedDate[1]
+        let disabledDate = endDate ? new Date(endDate) : null
         disabledDate =
           !this.disabledStartDate.from ||
           disabledDate.getTime() < this.disabledStartDate.from.getTime()
             ? disabledDate
-            : this.disabledStartDate.from;
-        unSelectedDate.from = disabledDate;
-        unSelectedDate.to = this.disabledStartDate.from;
+            : this.disabledStartDate.from
+        unSelectedDate.from = disabledDate
+        unSelectedDate.to = this.disabledStartDate.from
       }
-      return unSelectedDate;
+      return unSelectedDate
     },
-    disabledEndDateCalc() {
+    disabledEndDateCalc () {
       const unSelectedDate = {
         from: null,
-        to: null,
-      };
+        to: null
+      }
       if (this.range) {
-        let disabledDate = new Date(this.selectedDate[0]);
+        let disabledDate = new Date(this.selectedDate[0])
         disabledDate =
           !this.disabledEndDate.to ||
           disabledDate.getTime() > this.disabledEndDate.to.getTime()
             ? disabledDate
-            : this.disabledEndDate.to;
-        unSelectedDate.to = disabledDate;
-        unSelectedDate.from = this.disabledEndDate.from;
+            : this.disabledEndDate.to
+        unSelectedDate.to = disabledDate
+        unSelectedDate.from = this.disabledEndDate.from
       }
-      return unSelectedDate;
+      return unSelectedDate
     },
-    calendar() {
+    calendar () {
       return new Calendar(
         this.currentDate,
         this.lang,
         this.textFormat,
         { ...this.dateFormat },
         this.range ? this.disabledStartDateCalc : this.disabledStartDate
-      );
+      )
     },
-    calendarEnd() {
-      if (!this.range) return {};
+    calendarEnd () {
+      if (!this.range) return {}
       return new Calendar(
         this.currentDateEnd,
         this.lang,
         this.textFormat,
         { ...this.dateFormat },
         this.disabledEndDateCalc
-      );
+      )
     },
-    formattedValue() {
+    formattedValue () {
       if (!this.range) {
-        return this.formatDate(this.selectedDate);
-      } else if (this.selectedDate.filter(Boolean).length != 2) return null;
+        return this.formatDate(this.selectedDate)
+      } else if (this.selectedDate.filter(Boolean).length !== 2) return null
       return `${this.formatDate(this.selectedDate[0])} ${
         this.rangeSeperator
-      } ${this.formatDate(this.selectedDate[1])}`;
-    },
+      } ${this.formatDate(this.selectedDate[1])}`
+    }
   },
   methods: {
-    formatDate(value) {
-      if (!value) return null;
-      if (this.range && this.value.filter(Boolean).length === 0) return null;
+    formatDate (value) {
+      if (!value) return null
+      if (this.range && this.value.filter(Boolean).length === 0) return null
       return new Date(value).toLocaleDateString(this.lang, {
-        ...this.dateFormat,
-      });
+        ...this.dateFormat
+      })
     },
-    prevMonth(picker) {
+    prevMonth (picker) {
       const currentDate =
-        picker === "start" ? this.currentDate : this.currentDateEnd;
-      currentDate.month = currentDate.month - 1;
+        picker === 'start' ? this.currentDate : this.currentDateEnd
+      currentDate.month = currentDate.month - 1
       if (currentDate.month === -1) {
-        currentDate.year = currentDate.year - 1;
-        currentDate.month = 11;
+        currentDate.year = currentDate.year - 1
+        currentDate.month = 11
       }
     },
-    nextMonth(picker) {
+    nextMonth (picker) {
       const currentDate =
-        picker === "start" ? this.currentDate : this.currentDateEnd;
-      currentDate.month = currentDate.month + 1;
+        picker === 'start' ? this.currentDate : this.currentDateEnd
+      currentDate.month = currentDate.month + 1
       if (currentDate.month === 12) {
-        currentDate.year = currentDate.year + 1;
-        currentDate.month = 0;
+        currentDate.year = currentDate.year + 1
+        currentDate.month = 0
       }
     },
-    changeViewMode({ mode, picker}) {
-      let isEndPicker = picker === 'end'
-      let calendar = `calendar${isEndPicker ? "End" : ""}View`;
-      this[calendar] = mode;
+    changeViewMode ({ mode, picker }) {
+      const isEndPicker = picker === 'end'
+      const calendar = `calendar${isEndPicker ? 'End' : ''}View`
+      this[calendar] = mode
     },
     setYears ({ route, picker }) {
       if (picker === 'start') {
@@ -276,7 +276,7 @@ export default {
         this.currentDateEnd.year = year
       }
     },
-    setYear({ year, picker }) {
+    setYear ({ year, picker }) {
       this.setUniqYear({ year, picker })
       this.changeViewMode({ mode: 'months', picker })
     },
@@ -284,76 +284,76 @@ export default {
       if (picker === 'start') this.currentDate.year = year
       else if (picker === 'end') this.currentDateEnd.year = year
     },
-    setMonth({ month, picker }) {
+    setMonth ({ month, picker }) {
       if (picker === 'start') this.currentDate.month = month
       else if (picker === 'end') this.currentDateEnd.month = month
       this.changeViewMode({ mode: 'days', picker })
     },
-    handlerDate({ fullDate, picker = null }) {
+    handlerDate ({ fullDate, picker = null }) {
       if (!this.range) {
-        this.setDate(fullDate);
-        return;
+        this.setDate(fullDate)
+        return
       }
       const selectedDates = [
-        picker === "start" ? fullDate : this.selectedDate[0],
-        picker === "end" ? fullDate : this.selectedDate[1],
-      ];
-      this.setDate(selectedDates);
+        picker === 'start' ? fullDate : this.selectedDate[0],
+        picker === 'end' ? fullDate : this.selectedDate[1]
+      ]
+      this.setDate(selectedDates)
     },
-    setDate(selectedDates) {
-      this.selectedDate = selectedDates;
-      this.emitInputAction();
+    setDate (selectedDates) {
+      this.selectedDate = selectedDates
+      this.emitInputAction()
     },
-    emitInputAction() {
-      this.$emit("input", this.selectedDate);
+    emitInputAction () {
+      this.$emit('input', this.selectedDate)
       if (this.range) {
-        if (this.selectedDate.filter(Boolean).length === 2) this.close();
+        if (this.selectedDate.filter(Boolean).length === 2) this.close()
       } else {
-        this.close();
+        this.close()
       }
     },
-    close() {
-      this.isShowPicker = false;
+    close () {
+      this.isShowPicker = false
       this.calendarView = 'days'
       this.calendarEndView = 'days'
     },
-    setCurrents() {
+    setCurrents () {
       if (this.range) {
         if (this.value[0]) {
-          this.currentDate.year = new Date(this.value[0]).getFullYear();
-          this.currentDate.month = new Date(this.value[0]).getMonth();
-          this.currentDate.date = new Date(this.value[0]).getDate();
+          this.currentDate.year = new Date(this.value[0]).getFullYear()
+          this.currentDate.month = new Date(this.value[0]).getMonth()
+          this.currentDate.date = new Date(this.value[0]).getDate()
         }
         if (this.value[1]) {
-          this.currentDateEnd.year = new Date(this.value[1]).getFullYear();
-          this.currentDateEnd.month = new Date(this.value[1]).getMonth();
-          this.currentDateEnd.date = new Date(this.value[1]).getDate();
+          this.currentDateEnd.year = new Date(this.value[1]).getFullYear()
+          this.currentDateEnd.month = new Date(this.value[1]).getMonth()
+          this.currentDateEnd.date = new Date(this.value[1]).getDate()
         }
       } else if (this.value) {
-        this.currentDate.year = new Date(this.value).getFullYear();
-        this.currentDate.month = new Date(this.value).getMonth();
-        this.currentDate.date = new Date(this.value).getDate();
+        this.currentDate.year = new Date(this.value).getFullYear()
+        this.currentDate.month = new Date(this.value).getMonth()
+        this.currentDate.date = new Date(this.value).getDate()
       }
-    },
+    }
   },
-  mounted() {
-    this.setCurrents();
-    this.setDate(this.value);
-    this.$watch("value", () => {
-      this.setCurrents();
-      this.setDate(this.value);
-    });
-    this.$watch("selectedDate", (value) => {
-      if (!value && this.value === value) return;
-      this.$emit("change", value);
-    });
-    window.addEventListener("click", (e) => {
-      const Datepicker = this.$el;
-      const isThis = Datepicker.contains(e.target);
-      if (!isThis) this.close();
-    });
-  },
-};
+  mounted () {
+    this.setCurrents()
+    this.setDate(this.value)
+    this.$watch('value', () => {
+      this.setCurrents()
+      this.setDate(this.value)
+    })
+    this.$watch('selectedDate', (value) => {
+      if (!value && this.value === value) return
+      this.$emit('change', value)
+    })
+    window.addEventListener('click', (e) => {
+      const Datepicker = this.$el
+      const isThis = Datepicker.contains(e.target)
+      if (!isThis) this.close()
+    })
+  }
+}
 </script>
 
 <style>
@@ -559,7 +559,6 @@ export default {
   max-width: calc((var(--v-calendar-day-width) * 7) + 20px);
 }
 
-
 .v-calendar .calendar .years,
 .v-calendar .calendar .months  {
   min-height: 250px;
@@ -574,7 +573,6 @@ export default {
 .v-calendar .calendar .days-selection .days {
   padding-bottom: 20px;
 }
-
 
 .v-calendar .calendar .days .day,
 .v-calendar .calendar .years .year,
@@ -678,7 +676,6 @@ export default {
   border-radius: var(--v-calendar-year-border-radius);
   background-color: var(--v-calendar-year-bg-color);
 }
-
 
 .v-calendar .calendar .years .year:disabled {
   pointer-events: none;
