@@ -24,7 +24,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "package": "vue-cli-service build NODE_ENV=production --target lib --name vuedatepickerui --entry ./src/components/datepicker.vue --dest ./lib",
-    "deploy": "yarn package cp -R ./lib ./docs"
+    "deploy": "vue-cli-service build --dest ./docs"
   },
   "peerDependencies": {
     "vue": "^2.5.17"
