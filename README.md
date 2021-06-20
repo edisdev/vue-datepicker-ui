@@ -12,8 +12,8 @@
 
 ```javascript
 // main.js file
-import VueDatepickerUi from 'vue-datepicker-ui-root'
-import 'vue-datepicker-ui-root/lib/vuedatepickerui.css';
+import VueDatepickerUi from 'vue-datepicker-ui'
+import 'vue-datepicker-ui/lib/vuedatepickerui.css';
 
 Vue.component('Datepicker', VueDatepickerUi)
 ```
@@ -21,8 +21,8 @@ or
 
 ```vue
 <script>
-  import 'vue-datepicker-ui-root/lib/vuedatepickerui.css';
-  import VueDatepickerUi from 'vue-datepicker-ui-root'
+  import 'vue-datepicker-ui/lib/vuedatepickerui.css';
+  import VueDatepickerUi from 'vue-datepicker-ui';
 
   export default {
     components: {

@@ -1,8 +1,8 @@
 <meta charset="utf-8">
 <title>Vue Datepicker UI Demo</title>
 <script src="https://unpkg.com/vue"></script>
-<script src="./lib/vuedatepickerui.umd.js"></script>
-<link rel="stylesheet" href="./lib/vuedatepickerui.css">
+<script src="/lib/vuedatepickerui.umd.js"></script>
+<link rel="stylesheet" href="/lib/vuedatepickerui.css">
 
 
 <div id="app">
@@ -12,6 +12,25 @@
       <div class="package">
         <span class="install">npm install vue-datepicker-ui</span> or
         <span class="install">yarn add vue-datepicker-ui</span>
+      </div>
+      <div class="package">
+        <code class="install" id="jsFile">
+        import 'vue-datepicker-ui/lib/vuedatepickerui.css';
+        import VuedatepickerUi from 'vue-datepicker-ui';
+
+        Vue.component('Datepicker', VueDatepickerUi)
+        </code>
+        or
+        <code class="install" id="componentFile">
+        import 'vue-datepicker-ui/lib/vuedatepickerui.css';
+        import VueDatepickerUi from 'vue-datepicker-ui';
+      
+        export default {
+          components: {
+            Datepicker: VueDatepickerUi
+          }
+        }
+        </code>
       </div>
       <code class="code" v-html="exampleCode"></code>
     </div>
@@ -223,6 +242,29 @@
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 30px;
+  }
+
+  .titles .using code.install {
+    white-space: pre;
+    text-align: left;
+    line-height: 30px;
+    width: 100%;
+  }
+
+  .titles .using code.install::before {
+    color: #dff;
+    opacity: .4;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+
+  .titles .using code.install#componentFile::before{
+    content: "// component.vue";
+  }
+
+  .titles .using code.install#jsFile::before{
+    content: "// main.js";
   }
 
   .titles .using .code {
