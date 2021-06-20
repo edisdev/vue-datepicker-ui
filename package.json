@@ -1,42 +1,34 @@
 {
   "name": "vue-datepicker-ui",
-  "author": "edisdev <edisdev14@gmail.com>",
   "version": "2.0.1",
   "private": false,
-  "main": "./lib/vuedatepickerui.umd.js",
-  "license": "MIT",
   "description": "A Datepicker Component For Vue",
-  "keywords": [
-    "vue",
-    "datepicker",
-    "vue datepicker",
-    "date-picker",
-    "calendar",
-    "component"
-  ],
-  "homepage": "https://github.com/edisdev/vue-datepicker-ui",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/edisdev/vue-datepicker-ui.git"
-  },
+  "author": "edisdev <edisdev14@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "package": "vue-cli-service build NODE_ENV=production --target lib --name vuedatepickerui --entry ./src/components/datepicker.vue --dest ./lib",
-    "deploy": "vue-cli-service build --dest ./docs"
+    "deploy": "vue-cli-service build --dest ./docs",
+    "package": "vue-cli-service build NODE_ENV=production --target lib --name vuedatepickerui --entry ./src/components/datepicker.vue --dest ./lib"
   },
-  "peerDependencies": {
-    "vue": "^2.5.17"
+  "main": "./lib/vuedatepickerui.umd.js",
+  "dependencies": {
+    "calendar-data-generate": "^1.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "^3.0.0",
+    "@vue/test-utils": "^1.2.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "vue-template-compiler": "^2.5.17"
+  },
+  "peerDependencies": {
+    "vue": "^2.5.17"
   },
   "eslintConfig": {
     "root": true,
@@ -50,7 +42,18 @@
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "postcss": {
     "plugins": {
@@ -62,7 +65,18 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "dependencies": {
-    "calendar-data-generate": "^1.0.3"
+  "homepage": "https://github.com/edisdev/vue-datepicker-ui",
+  "keywords": [
+    "vue",
+    "datepicker",
+    "vue datepicker",
+    "date-picker",
+    "calendar",
+    "component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edisdev/vue-datepicker-ui.git"
   }
 }
