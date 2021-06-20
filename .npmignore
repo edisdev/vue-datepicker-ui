@@ -1,0 +1,9 @@
+/resources
+
+/yarn.lock
+
+/demo.html
+/lib/demo.html
+
+vue.config.js
+babel.config.js

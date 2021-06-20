@@ -8,6 +8,36 @@
 <img src="./resources/singlepicker.png" width="50%">
 
 
+### Using
+
+```javascript
+// main.js file
+import VueDatepickerUi from 'vue-datepicker-ui-root'
+import 'vue-datepicker-ui-root/lib/vuedatepickerui.css';
+
+Vue.component('Datepicker', VueDatepickerUi)
+```
+or
+
+```vue
+<script>
+  import 'vue-datepicker-ui-root/lib/vuedatepickerui.css';
+  import VueDatepickerUi from 'vue-datepicker-ui-root'
+
+  export default {
+    components: {
+      Datepicker: VueDatepickerUi
+    }
+  }
+</script>
+```
+and
+
+```vue
+<template>
+  <datepicker ...props>
+</template>
+```
 ### Props
 ``` html
    <Calendar 
