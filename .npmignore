@@ -16,3 +16,7 @@ yarn-error.log
 vue.config.js
 babel.config.js
 jest.config.js
+jsconfig.json
+
+##tests
+/tests

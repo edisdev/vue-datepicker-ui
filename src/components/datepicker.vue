@@ -74,6 +74,7 @@
 
 <script>
 import Calendar from 'calendar-data-generate'
+import formatDate from '@/utils/formatDate'
 
 import CalendarUI from './calendar'
 
@@ -238,11 +239,7 @@ export default {
   },
   methods: {
     formatDate (value) {
-      if (!value) return null
-      if (this.range && this.value.filter(Boolean).length === 0) return null
-      return new Date(value).toLocaleDateString(this.lang, {
-        ...this.dateFormat
-      })
+      return formatDate(value, this)
     },
     prevMonth (picker) {
       const currentDate =
