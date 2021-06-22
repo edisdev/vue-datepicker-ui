@@ -52,5 +52,19 @@ describe('Calender View', () => {
       const years = wrapper.findAll('.year')
       expect(years.length).toBe(11)
     })
+
+    test('there should be a calendar', () => {
+      const calendar = wrapper.findAll('.calendar')
+      expect(calendar.length).toBe(1)
+    })
+
+    test('should be called handlerDate when selected a date', async () => {
+      const mockHandlerDate = jest.spyOn(wrapper.vm, 'handlerDate')
+
+      const fifthDay = wrapper.findAll('.days-selection > .days > .day').at(6)
+      await fifthDay.trigger('click')
+
+      expect(mockHandlerDate).toHaveBeenCalled()
+    })
   })
 })
