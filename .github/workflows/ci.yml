@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Add Vue Package
-        run: yarn add vue
-
       - name: Install dependencies
         run: yarn install
+
+      - name: Add Vue Package
+        run: yarn add --peer vue
 
       - name: Run linter
         run: yarn lint
