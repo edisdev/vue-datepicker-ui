@@ -22,7 +22,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit -u",
     "lint": "vue-cli-service lint",
     "package": "vue-cli-service build NODE_ENV=production --target lib --name vuedatepickerui --entry ./src/components/datepicker.vue --dest ./lib",
     "deploy": "vue-cli-service build --dest ./docs"
