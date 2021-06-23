@@ -13,8 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Add Peer Dependency for VUE
-        run: yarn add vue -P
+      - name: Add Vue Package
+        run: yarn add vue
 
       - name: Install dependencies
         run: yarn install
