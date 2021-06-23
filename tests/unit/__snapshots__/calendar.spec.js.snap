@@ -1,5 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Calender View Single datepicker is correct render 1`] = `
+<div class="calendar">
+  <div class="selected-field">
+    <div class="selected-date"><button type="button" class="prevDateButton"></button> <button type="button" class="viewButton">
+        Haz 2021
+      </button> <button type="button" class="nextDateButton"></button></div>
+    <div class="days">
+      <div class="day name">
+        Pzt
+      </div>
+      <div class="day name">
+        Sal
+      </div>
+      <div class="day name">
+        Çar
+      </div>
+      <div class="day name">
+        Per
+      </div>
+      <div class="day name">
+        Cum
+      </div>
+      <div class="day name">
+        Cmt
+      </div>
+      <div class="day name">
+        Paz
+      </div>
+    </div>
+  </div>
+  <div class="days-selection">
+    <div class="days"><button type="button" class="day disabledDate"><span class="number">31</span></button><button type="button" class="day"><span class="number">1</span></button><button type="button" class="day"><span class="number">2</span></button><button type="button" class="day"><span class="number">3</span></button><button type="button" class="day"><span class="number">4</span></button><button type="button" class="day"><span class="number">5</span></button><button type="button" class="day"><span class="number">6</span></button><button type="button" class="day"><span class="number">7</span></button><button type="button" class="day"><span class="number">8</span></button><button type="button" class="day"><span class="number">9</span></button><button type="button" class="day"><span class="number">10</span></button><button type="button" class="day"><span class="number">11</span></button><button type="button" class="day"><span class="number">12</span></button><button type="button" class="day"><span class="number">13</span></button><button type="button" class="day"><span class="number">14</span></button><button type="button" class="day"><span class="number">15</span></button><button type="button" class="day"><span class="number">16</span></button><button type="button" class="day"><span class="number">17</span></button><button type="button" class="day"><span class="number">18</span></button><button type="button" class="day"><span class="number">19</span></button><button type="button" class="day"><span class="number">20</span></button><button type="button" class="day"><span class="number">21</span></button><button type="button" class="day"><span class="number">22</span></button><button type="button" class="day"><span class="number">23</span></button><button type="button" class="day"><span class="number">24</span></button><button type="button" class="day"><span class="number">25</span></button><button type="button" class="day"><span class="number">26</span></button><button type="button" class="day"><span class="number">27</span></button><button type="button" class="day"><span class="number">28</span></button><button type="button" class="day"><span class="number">29</span></button><button type="button" class="day"><span class="number">30</span></button><button type="button" class="day disabledDate"><span class="number">1</span></button><button type="button" class="day disabledDate"><span class="number">2</span></button><button type="button" class="day disabledDate"><span class="number">3</span></button><button type="button" class="day disabledDate"><span class="number">4</span></button></div>
+    <div class="viewmode">
+      <div class="years" style="display: none;"><button type="button" class="year">
+          2021
+        </button><button type="button" class="year">
+          2022
+        </button><button type="button" class="year">
+          2023
+        </button><button type="button" class="year">
+          2024
+        </button><button type="button" class="year">
+          2025
+        </button><button type="button" class="year">
+          2026
+        </button><button type="button" class="year">
+          2027
+        </button><button type="button" class="year">
+          2028
+        </button><button type="button" class="year">
+          2029
+        </button><button type="button" class="year">
+          2030
+        </button><button type="button" class="year">
+          2031
+        </button></div>
+      <div class="months" style="display: none;"><button type="button" class="month">
+          Oca
+        </button><button type="button" class="month">
+          Şub
+        </button><button type="button" class="month">
+          Mar
+        </button><button type="button" class="month">
+          Nis
+        </button><button type="button" class="month">
+          May
+        </button><button type="button" class="month">
+          Haz
+        </button><button type="button" class="month">
+          Tem
+        </button><button type="button" class="month">
+          Ağu
+        </button><button type="button" class="month">
+          Eyl
+        </button><button type="button" class="month">
+          Eki
+        </button><button type="button" class="month">
+          Kas
+        </button><button type="button" class="month">
+          Ara
+        </button></div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Calender View is correct render 1`] = `
 <div class="calendar">
   <div class="selected-field">
