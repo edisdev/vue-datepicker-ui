@@ -66,5 +66,30 @@ describe('Calender View', () => {
 
       expect(mockHandlerDate).toHaveBeenCalled()
     })
+
+    test('should can be set years', async () => {
+      const currentYear = new Date().getFullYear()
+
+      const viewButton = wrapper.find('.viewButton')
+      await viewButton.trigger('click')
+
+      const currentYearButton = wrapper.findAll('.year').at(0)
+      await currentYearButton.trigger('click')
+
+      expect(wrapper.emitted().setYear).toEqual([[{ year: currentYear, picker: 'start' }]])
+    })
+
+    test('should can be set months', async () => {
+      const viewButton = wrapper.find('.viewButton')
+      await viewButton.trigger('click')
+
+      const firstYear = wrapper.findAll('.year').at(0)
+      await firstYear.trigger('click')
+
+      const secondMonth = wrapper.findAll('.month').at(1)
+      await secondMonth.trigger('click')
+
+      expect(wrapper.emitted().setMonth).toEqual([[{ month: 1, picker: 'start' }]])
+    })
   })
 })
