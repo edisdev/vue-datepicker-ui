@@ -111,5 +111,23 @@ describe('Calender View', () => {
 
       expect(wrapper.emitted().prevMonth).toEqual([['start']])
     })
+
+    test('should can select next year when clicked next button while viewMode is months', async () => {
+      await wrapper.setProps({ viewMode: 'months' })
+
+      const nextDateButton = wrapper.find('.nextDateButton')
+      await nextDateButton.trigger('click')
+
+      expect(wrapper.emitted().setUniqYear).toEqual([[{ year: BasicData.currentDate.year + 1, picker: 'start' }]])
+    })
+
+    test('should can select prev year when clicked next button while viewMode is months', async () => {
+      await wrapper.setProps({ viewMode: 'months' })
+
+      const prevDateButton = wrapper.find('.prevDateButton')
+      await prevDateButton.trigger('click')
+
+      expect(wrapper.emitted().setUniqYear).toEqual([[{ year: BasicData.currentDate.year - 1, picker: 'start' }]])
+    })
   })
 })
