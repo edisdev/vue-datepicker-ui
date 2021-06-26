@@ -91,5 +91,61 @@ describe('Calender View', () => {
 
       expect(wrapper.emitted().setMonth).toEqual([[{ month: 1, picker: 'start' }]])
     })
+
+    test('should can select next month when clicked next button while viewMode is days', async () => {
+      const viewButton = wrapper.find('.viewButton')
+      await viewButton.trigger('click')
+
+      const nextDateButton = wrapper.find('.nextDateButton')
+      await nextDateButton.trigger('click')
+
+      expect(wrapper.emitted().nextMonth).toEqual([['start']])
+    })
+
+    test('should can select prev month when clicked prev button while viewMode is days', async () => {
+      const viewButton = wrapper.find('.viewButton')
+      await viewButton.trigger('click')
+
+      const prevDateButton = wrapper.find('.prevDateButton')
+      await prevDateButton.trigger('click')
+
+      expect(wrapper.emitted().prevMonth).toEqual([['start']])
+    })
+
+    test('should can select next year when clicked next button while viewMode is months', async () => {
+      await wrapper.setProps({ viewMode: 'months' })
+
+      const nextDateButton = wrapper.find('.nextDateButton')
+      await nextDateButton.trigger('click')
+
+      expect(wrapper.emitted().setUniqYear).toEqual([[{ year: BasicData.currentDate.year + 1, picker: 'start' }]])
+    })
+
+    test('should can select prev year when clicked prev button while viewMode is months', async () => {
+      await wrapper.setProps({ viewMode: 'months' })
+
+      const prevDateButton = wrapper.find('.prevDateButton')
+      await prevDateButton.trigger('click')
+
+      expect(wrapper.emitted().setUniqYear).toEqual([[{ year: BasicData.currentDate.year - 1, picker: 'start' }]])
+    })
+
+    test('should can set next years when clicked next button while viewMode is years', async () => {
+      await wrapper.setProps({ viewMode: 'years' })
+
+      const nextDateButton = wrapper.find('.nextDateButton')
+      await nextDateButton.trigger('click')
+
+      expect(wrapper.emitted().setYears).toEqual([[{ route: 'next', picker: 'start' }]])
+    })
+
+    test('should can set prev years when clicked prev button while viewMode is years', async () => {
+      await wrapper.setProps({ viewMode: 'years' })
+
+      const prevDateButton = wrapper.find('.prevDateButton')
+      await prevDateButton.trigger('click')
+
+      expect(wrapper.emitted().setYears).toEqual([[{ route: 'prev', picker: 'start' }]])
+    })
   })
 })
