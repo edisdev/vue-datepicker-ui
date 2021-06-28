@@ -1,12 +1,14 @@
 # Vue Datepicker Component
   >A Datepicker Component For VueJs
 (https://edisdev.github.io/vue-datepicker-ui)
+
+![npm](https://img.shields.io/npm/dt/vue-datepicker-ui?style=for-the-badge)
+
 <img src="./resources/datepicker.gif" width="70%">
 <hr>
 <img src="./resources/rangepicker.png" width="100%"/>
 <hr>
 <img src="./resources/singlepicker.png" width="50%">
-
 
 ### Using
 
