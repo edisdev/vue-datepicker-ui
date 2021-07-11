@@ -76,6 +76,7 @@ date-format | Object | This is the format in which the selected date will be dis
 disabled | Boolean | This parameter is the datepicker prevents opening | false
 placeholder | String | Input placeholder | Select Date
 circle | Boolean | This is selected are circle or area | false
+showClearButton | Boolean | This property is If there is a selected date, it allows the button used to delete this date to be displayed or not. | false
 
 
 and customize style with css variables
