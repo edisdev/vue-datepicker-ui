@@ -8,7 +8,7 @@ const Basic = {
     date: new Date().getDate(),
     firstDayOfWeek: 'monday'
   },
-  lang: 'tr',
+  lang: 'en',
   textFormat: 'short',
   dateFormat: {
     day: '2-digit',
@@ -20,16 +20,14 @@ const Basic = {
   viewMode: 'days'
 }
 
-const BASIC_CALENDAR = new Calendar(
-  Basic.currentDate,
-  Basic.lang,
-  Basic.textFormat,
-  { ...Basic.dateFormat },
-  Basic.range
-)
-
 export const BasicData = {
-  calendar: BASIC_CALENDAR,
+  calendar: new Calendar(
+    Basic.currentDate,
+    Basic.lang,
+    Basic.textFormat,
+    { ...Basic.dateFormat },
+    Basic.range
+  ),
   formatDate: (value) => {
     return formatDate(value, BasicData)
   },

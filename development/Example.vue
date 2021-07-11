@@ -33,6 +33,7 @@
             :disabled-end-date="example.disabledEndDate"
             :disabled="example.disabled || false"
             :circle="example.circle || false"
+            :show-clear-button="example.showClearButton || false"
           />
           <blockquote class="exam-props">
             <textarea :value="JSON.stringify(example, null, 2)" readonly>
@@ -59,6 +60,7 @@
             :disabled-end-date="example.disabledEndDate"
             :disabled="example.disabled || false"
             :circle="example.circle || false"
+            :show-clear-button="example.showClearButton || false"
           />
           <blockquote class="exam-props">
             <textarea :value="JSON.stringify(example, null, 2)" readonly>
@@ -89,6 +91,16 @@ export default {
           position: 'bottom',
           range: false,
           value: null,
+          firstDayOfWeek: 'monday'
+        },
+        {
+          title: 'With Clear Button',
+          inputClass: 'exampleDatePicker',
+          lang: 'tr',
+          position: 'bottom',
+          range: false,
+          showClearButton: true,
+          value: new Date(),
           firstDayOfWeek: 'monday'
         },
         {

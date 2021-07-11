@@ -22,8 +22,24 @@
           d="M10 12h4v4h-4zM16 12h4v4h-4zM22 12h4v4h-4zM4 24h4v4h-4zM10 24h4v4h-4zM16 24h4v4h-4zM10 18h4v4h-4zM16 18h4v4h-4zM22 18h4v4h-4zM4 18h4v4h-4zM26 0v2h-4v-2h-14v2h-4v-2h-4v32h30v-32h-4zM28 30h-26v-22h26v22z"
         ></path>
       </svg>
+      <button
+        v-if="showClearButton && selectedDate"
+        type="button"
+        class="clearButton"
+        @click="resetDate">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+        >
+          <path
+            d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"
+          ></path>
+        </svg>
+      </button>
     </div>
-
     <div class="content" v-if="isShowPicker">
       <CalendarUI
         :calendar="calendar"
@@ -81,26 +97,6 @@ import CalendarUI from './calendar'
 export default {
   name: 'VueDatePicker',
   components: { CalendarUI },
-  data () {
-    return {
-      isShowPicker: false,
-      currentDate: {
-        year: new Date().getFullYear(),
-        month: new Date().getMonth(),
-        date: new Date().getDate(),
-        firstDayOfWeek: this.firstDayOfWeek
-      },
-      currentDateEnd: {
-        year: new Date().getFullYear(),
-        month: new Date().getMonth(),
-        date: new Date().getDate(),
-        firstDayOfWeek: this.firstDayOfWeek
-      },
-      selectedDate: this.range ? [null, null] : null,
-      calendarView: 'days',
-      calendarEndView: 'days'
-    }
-  },
   props: {
     value: {},
     textFormat: {
@@ -171,6 +167,30 @@ export default {
     circle: {
       type: Boolean,
       default: false
+    },
+    showClearButton: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      isShowPicker: false,
+      currentDate: {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        date: new Date().getDate(),
+        firstDayOfWeek: this.firstDayOfWeek
+      },
+      currentDateEnd: {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        date: new Date().getDate(),
+        firstDayOfWeek: this.firstDayOfWeek
+      },
+      selectedDate: this.defaultSelectedDate(),
+      calendarView: 'days',
+      calendarEndView: 'days'
     }
   },
   computed: {
@@ -266,10 +286,20 @@ export default {
     },
     setYears ({ route, picker }) {
       if (picker === 'start') {
-        const year = route === 'prev' ? this.calendar.years[0] - 11 : route === 'next' ? this.calendar.years[10] + 1 : ''
+        const year =
+          route === 'prev'
+            ? this.calendar.years[0] - 11
+            : route === 'next'
+              ? this.calendar.years[10] + 1
+              : ''
         this.currentDate.year = year
       } else if (picker === 'end') {
-        const year = route === 'prev' ? this.calendarEnd.years[0] - 11 : route === 'next' ? this.calendarEnd.years[10] + 1 : ''
+        const year =
+          route === 'prev'
+            ? this.calendarEnd.years[0] - 11
+            : route === 'next'
+              ? this.calendarEnd.years[10] + 1
+              : ''
         this.currentDateEnd.year = year
       }
     },
@@ -298,6 +328,7 @@ export default {
       this.setDate(selectedDates)
     },
     setDate (selectedDates) {
+      if (typeof selectedDates === 'undefined') return
       this.selectedDate = selectedDates
       this.emitInputAction()
     },
@@ -314,7 +345,14 @@ export default {
       this.calendarView = 'days'
       this.calendarEndView = 'days'
     },
+    resetDate () {
+      this.selectedDate = this.defaultSelectedDate()
+    },
+    defaultSelectedDate () {
+      return this.range ? [null, null] : null
+    },
     setCurrents () {
+      if (typeof this.value === 'undefined') return
       if (this.range) {
         if (this.value[0]) {
           this.currentDate.year = new Date(this.value[0]).getFullYear()
@@ -334,8 +372,8 @@ export default {
     }
   },
   mounted () {
-    this.setCurrents()
     this.setDate(this.value)
+    this.setCurrents()
     this.$watch('value', () => {
       this.setCurrents()
       this.setDate(this.value)
@@ -357,8 +395,8 @@ export default {
 :root {
   --v-calendar-picker-color: #fff;
   --v-calendar-input-bg-color: #fff;
-  --v-calendar-input-bg-disable-color:rgb(245, 245, 245);
-  --v-calendar-input-text-disable-color:#b8b8b9;
+  --v-calendar-input-bg-disable-color: rgb(245, 245, 245);
+  --v-calendar-input-text-disable-color: #b8b8b9;
   --v-calendar-select-bg-color: #fff;
   --v-calendar-border-color: #eaeaeb;
   --v-calendar-triangle-color: #eaeaeb;
@@ -440,6 +478,28 @@ export default {
   font-weight: var(--v-calendar-input-font-weight);
 }
 
+.v-calendar .input-field .clearButton {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  color: var(--v-calendar-text-color);
+  padding: 0;
+  cursor: pointer;
+  border: none;
+}
+
+.v-calendar .input-field .clearButton svg {
+  fill: currentColor;
+}
+
+.v-calendar .input-field .clearButton,
+.v-calendar .input-field .clearButton svg {
+  width: var(--v-calendar-day-font-size);
+  height: var(--v-calendar-day-font-size);
+}
+
 .v-calendar .input-field input:disabled ~ svg {
   fill: var(--v-calendar-text-color);
 }
@@ -463,7 +523,7 @@ export default {
 
 .v-calendar .input-field input:disabled {
   background-color: var(--v-calendar-input-bg-disable-color);
-   color: var(--v-calendar-input-text-disable-color);
+  color: var(--v-calendar-input-text-disable-color);
 }
 
 .v-calendar .input-field svg {
@@ -544,7 +604,7 @@ export default {
 
 .v-calendar .calendar .days {
   display: grid;
-  grid-template-columns: repeat(7,minmax(max-content,1fr));
+  grid-template-columns: repeat(7, minmax(max-content, 1fr));
 }
 
 .v-calendar .calendar .years,
@@ -557,7 +617,7 @@ export default {
 }
 
 .v-calendar .calendar .years,
-.v-calendar .calendar .months  {
+.v-calendar .calendar .months {
   min-height: 250px;
 }
 
@@ -581,7 +641,7 @@ export default {
 }
 
 .v-calendar .calendar .years .year,
-.v-calendar .calendar .months .month  {
+.v-calendar .calendar .months .month {
   width: max-content;
   height: max-content;
 }
@@ -653,7 +713,7 @@ export default {
 
 .v-calendar .calendar .days .day.disabledDate {
   pointer-events: none;
-  color: var(--v-calendar-text-disabled-color)
+  color: var(--v-calendar-text-disabled-color);
 }
 
 .v-calendar .calendar .days .day.disabledDate.selectedRange {
