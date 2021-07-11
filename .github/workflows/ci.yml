@@ -24,6 +24,7 @@ jobs:
 
       - name: full-icu install
         run: npm install -g full-icu
+      - name: set NODE_ICU_DATA path
         run: echo "NODE_ICU_DATA=`node-full-icu-path 2>/dev/null`" >> $GITHUB_ENV
 
       - name: Run tests
