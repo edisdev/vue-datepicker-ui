@@ -38,3 +38,8 @@ jobs:
 
       - name: Run tests
         run: yarn test:unit
+      
+      - uses: actions/checkout@master
+      - uses: codecov/codecov-action@v1
+        with:
+          files: ./coverage/coverage-final.json
