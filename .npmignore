@@ -20,3 +20,4 @@ jsconfig.json
 
 ##tests
 /tests
+/coverage
