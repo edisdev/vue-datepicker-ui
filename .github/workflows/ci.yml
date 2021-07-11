@@ -10,6 +10,10 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node: ['14']
+
     steps:
       - uses: actions/checkout@v2
 
@@ -24,4 +28,6 @@ jobs:
 
       - name: Run tests
         uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
         run: yarn test:unit
