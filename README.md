@@ -2,7 +2,10 @@
   >A Datepicker Component For VueJs
 (https://edisdev.github.io/vue-datepicker-ui)
 
-![npm](https://img.shields.io/npm/dt/vue-datepicker-ui?style=for-the-badge)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/edisdev/vue-datepicker-ui)
+[![codecov](https://codecov.io/gh/edisdev/vue-datepicker-ui/branch/develop/graph/badge.svg?token=6VJS9RSMW8)](https://codecov.io/gh/edisdev/vue-datepicker-ui)
+![npm](https://img.shields.io/npm/dt/vue-datepicker-ui)
+![GitHub](https://img.shields.io/github/license/edisdev/vue-datepicker-ui)
 
 <img src="./resources/datepicker.gif" width="70%">
 <hr>
@@ -132,7 +135,7 @@ element {
   --v-calendar-month-padding: 8px;
   --v-calendar-month-border: none;
   --v-calendar-month-border-radius: none;
-  }
+}
 ```
 
 
