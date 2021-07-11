@@ -19,10 +19,6 @@ jobs:
         id: setup-icu
         with:
           noexport: true
-      
-      - uses: sarisia/action-uses-icu-function@v2
-        env:
-          NODE_ICU_DATA: ${{ steps.setup-icu.outputs.icu-data-dir }}
 
       - name: Install dependencies
         run: yarn install
