@@ -1,5 +1,7 @@
-import formatDate from '@/utils/formatDate'
 import Calendar from 'calendar-data-generate'
+//
+import { MODE_ENUMS } from '@/utils/modes'
+import formatDate from '@/utils/formatDate'
 
 const Basic = {
   currentDate: {
@@ -8,7 +10,7 @@ const Basic = {
     date: new Date().getDate(),
     firstDayOfWeek: 'monday'
   },
-  lang: 'tr',
+  lang: 'en',
   textFormat: 'short',
   dateFormat: {
     day: '2-digit',
@@ -17,19 +19,17 @@ const Basic = {
   },
   disableDate: { to: null, from: null },
   range: false,
-  viewMode: 'days'
+  viewMode: MODE_ENUMS.DAY
 }
 
-const BASIC_CALENDAR = new Calendar(
-  Basic.currentDate,
-  Basic.lang,
-  Basic.textFormat,
-  { ...Basic.dateFormat },
-  Basic.range
-)
-
 export const BasicData = {
-  calendar: BASIC_CALENDAR,
+  calendar: new Calendar(
+    Basic.currentDate,
+    Basic.lang,
+    Basic.textFormat,
+    { ...Basic.dateFormat },
+    Basic.range
+  ),
   formatDate: (value) => {
     return formatDate(value, BasicData)
   },
