@@ -2,17 +2,23 @@ name: CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   ci:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v2
-
+      - uses: actions/setup-node@v2-beta
+        with: 
+          node-version: ${{ matrix.node-version }}
+  
       - name: Install dependencies
         run: yarn install
 
@@ -23,7 +29,7 @@ jobs:
         run: yarn lint
 
       - name: full-icu install
-        run: yarn add global full-icu
+        run: yarn global add full-icu
   
       - name: set NODE_ICU_DATA path
         run: echo "NODE_ICU_DATA=`node-full-icu-path 2>/dev/null`" >> $GITHUB_ENV
