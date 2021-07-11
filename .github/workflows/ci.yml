@@ -24,6 +24,4 @@ jobs:
 
       - name: Run tests
         uses: actions/setup-node@v2
-        with:
-          node-version: 14
         run: yarn test:unit
