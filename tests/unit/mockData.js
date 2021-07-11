@@ -1,5 +1,7 @@
-import formatDate from '@/utils/formatDate'
 import Calendar from 'calendar-data-generate'
+//
+import { MODE_ENUMS } from '@/utils/modes'
+import formatDate from '@/utils/formatDate'
 
 const Basic = {
   currentDate: {
@@ -17,7 +19,7 @@ const Basic = {
   },
   disableDate: { to: null, from: null },
   range: false,
-  viewMode: 'days'
+  viewMode: MODE_ENUMS.DAY
 }
 
 export const BasicData = {

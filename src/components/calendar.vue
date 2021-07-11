@@ -6,7 +6,7 @@
         <button
           type="button"
           class="viewButton"
-          @click="changeViewMode('years')"
+          @click="changeViewMode(MODE_ENUMS.YEAR)"
         >
           {{ viewButtonText }}
         </button>
@@ -43,7 +43,7 @@
         </button>
       </div>
       <div class="viewmode">
-        <div class="years" v-show="viewMode === 'years'">
+        <div class="years" v-show="viewMode === MODE_ENUMS.YEAR">
           <button
             v-for="y in years"
             :key="y.year"
@@ -55,7 +55,7 @@
             {{ y.year }}
           </button>
         </div>
-        <div class="months" v-show="viewMode === 'months'">
+        <div class="months" v-show="viewMode === MODE_ENUMS.MONTH">
           <button
             v-for="month in months"
             :key="month.index"
@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import { MODE_ENUMS } from '@/utils/modes'
+
 export default {
   props: {
     calendar: {
@@ -122,11 +124,14 @@ export default {
       } else return this.selectedDate
     },
     isDayMode () {
-      return this.viewMode === 'days'
+      return this.viewMode === MODE_ENUMS.DAY
     },
     yearsRange () {
       const years = this.calendar.years
       return years[0] + this.rangeSeperator + years[years.length - 1]
+    },
+    MODE_ENUMS () {
+      return MODE_ENUMS
     },
     dayViewText () {
       return (
@@ -138,10 +143,10 @@ export default {
     viewButtonText () {
       let text
       switch (this.viewMode) {
-        case 'years':
+        case MODE_ENUMS.YEAR:
           text = this.yearsRange
           break
-        case 'months':
+        case MODE_ENUMS.MONTH:
           text = this.currentDate.year
           break
         default:
@@ -206,31 +211,31 @@ export default {
     },
     prev () {
       switch (this.viewMode) {
-        case 'days':
+        case MODE_ENUMS.DAY:
           this.$emit('prevMonth', this.pickerType)
           break
-        case 'months':
+        case MODE_ENUMS.MONTH:
           this.$emit('setUniqYear', {
             year: this.currentDate.year - 1,
             picker: this.pickerType
           })
           break
-        case 'years':
+        case MODE_ENUMS.YEAR:
           this.$emit('setYears', { route: 'prev', picker: this.pickerType })
       }
     },
     next () {
       switch (this.viewMode) {
-        case 'days':
+        case MODE_ENUMS.DAY:
           this.$emit('nextMonth', this.pickerType)
           break
-        case 'months':
+        case MODE_ENUMS.MONTH:
           this.$emit('setUniqYear', {
             year: this.currentDate.year + 1,
             picker: this.pickerType
           })
           break
-        case 'years':
+        case MODE_ENUMS.YEAR:
           this.$emit('setYears', { route: 'next', picker: this.pickerType })
       }
     },

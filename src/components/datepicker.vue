@@ -90,8 +90,10 @@
 
 <script>
 import Calendar from 'calendar-data-generate'
+//
+import { MODE_ENUMS } from '@/utils/modes'
 import formatDate from '@/utils/formatDate'
-
+//
 import CalendarUI from './calendar'
 
 export default {
@@ -189,8 +191,8 @@ export default {
         firstDayOfWeek: this.firstDayOfWeek
       },
       selectedDate: this.defaultSelectedDate(),
-      calendarView: 'days',
-      calendarEndView: 'days'
+      calendarView: MODE_ENUMS.DAY,
+      calendarEndView: MODE_ENUMS.DAY
     }
   },
   computed: {
@@ -251,7 +253,7 @@ export default {
     formattedValue () {
       if (!this.range) {
         return this.formatDate(this.selectedDate)
-      } else if (this.selectedDate.filter(Boolean).length !== 2) return null
+      } else if (!Array.isArray(this.selectedDate) || this.selectedDate.filter(Boolean).length !== 2) return null
       return `${this.formatDate(this.selectedDate[0])} ${
         this.rangeSeperator
       } ${this.formatDate(this.selectedDate[1])}`
@@ -305,7 +307,7 @@ export default {
     },
     setYear ({ year, picker }) {
       this.setUniqYear({ year, picker })
-      this.changeViewMode({ mode: 'months', picker })
+      this.changeViewMode({ mode: MODE_ENUMS.MONTH, picker })
     },
     setUniqYear ({ year, picker }) {
       if (picker === 'start') this.currentDate.year = year
@@ -314,7 +316,7 @@ export default {
     setMonth ({ month, picker }) {
       if (picker === 'start') this.currentDate.month = month
       else if (picker === 'end') this.currentDateEnd.month = month
-      this.changeViewMode({ mode: 'days', picker })
+      this.changeViewMode({ mode: MODE_ENUMS.DAY, picker })
     },
     handlerDate ({ fullDate, picker = null }) {
       if (!this.range) {
@@ -342,8 +344,8 @@ export default {
     },
     close () {
       this.isShowPicker = false
-      this.calendarView = 'days'
-      this.calendarEndView = 'days'
+      this.calendarView = MODE_ENUMS.DAY
+      this.calendarEndView = MODE_ENUMS.DAY
     },
     resetDate () {
       this.selectedDate = this.defaultSelectedDate()
@@ -382,7 +384,7 @@ export default {
       if (!value && this.value === value) return
       this.$emit('change', value)
     })
-    window.addEventListener('click', (e) => {
+    document.body.addEventListener('click', (e) => {
       const Datepicker = this.$el
       const isThis = Datepicker.contains(e.target)
       if (!isThis) this.close()

@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils'
-
+//
 import { BasicData } from './mockData'
+import { MODE_ENUMS } from '@/utils/modes'
+//
 import Calendar from '@/components/calendar.vue'
 
 describe('Calender View', () => {
@@ -113,7 +115,7 @@ describe('Calender View', () => {
     })
 
     test('should can select next year when clicked next button while viewMode is months', async () => {
-      await wrapper.setProps({ viewMode: 'months' })
+      await wrapper.setProps({ viewMode: MODE_ENUMS.MONTH })
 
       const nextDateButton = wrapper.find('.nextDateButton')
       await nextDateButton.trigger('click')
@@ -122,7 +124,7 @@ describe('Calender View', () => {
     })
 
     test('should can select prev year when clicked prev button while viewMode is months', async () => {
-      await wrapper.setProps({ viewMode: 'months' })
+      await wrapper.setProps({ viewMode: MODE_ENUMS.MONTH })
 
       const prevDateButton = wrapper.find('.prevDateButton')
       await prevDateButton.trigger('click')
@@ -131,7 +133,7 @@ describe('Calender View', () => {
     })
 
     test('should can set next years when clicked next button while viewMode is years', async () => {
-      await wrapper.setProps({ viewMode: 'years' })
+      await wrapper.setProps({ viewMode: MODE_ENUMS.YEAR })
 
       const nextDateButton = wrapper.find('.nextDateButton')
       await nextDateButton.trigger('click')
@@ -140,7 +142,7 @@ describe('Calender View', () => {
     })
 
     test('should can set prev years when clicked prev button while viewMode is years', async () => {
-      await wrapper.setProps({ viewMode: 'years' })
+      await wrapper.setProps({ viewMode: MODE_ENUMS.YEAR })
 
       const prevDateButton = wrapper.find('.prevDateButton')
       await prevDateButton.trigger('click')
