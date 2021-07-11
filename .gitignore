@@ -25,4 +25,6 @@ yarn.lock
 package-lock.json
 
 # test
-coverage
+coverage/lcov-report
+coverage/clover.xml
+coverage/lcov.info
