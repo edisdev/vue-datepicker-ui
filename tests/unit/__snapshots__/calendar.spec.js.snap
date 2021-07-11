@@ -4,29 +4,29 @@ exports[`Calender View Single datepicker is correct render 1`] = `
 <div class="calendar">
   <div class="selected-field">
     <div class="selected-date"><button type="button" class="prevDateButton"></button> <button type="button" class="viewButton">
-        Tem 2021
+        Jul 2021
       </button> <button type="button" class="nextDateButton"></button></div>
     <div class="days">
       <div class="day name">
-        Pzt
+        Mon
       </div>
       <div class="day name">
-        Sal
+        Tue
       </div>
       <div class="day name">
-        Çar
+        Wed
       </div>
       <div class="day name">
-        Per
+        Thu
       </div>
       <div class="day name">
-        Cum
+        Fri
       </div>
       <div class="day name">
-        Cmt
+        Sat
       </div>
       <div class="day name">
-        Paz
+        Sun
       </div>
     </div>
   </div>
@@ -57,29 +57,29 @@ exports[`Calender View Single datepicker is correct render 1`] = `
           2031
         </button></div>
       <div class="months" style="display: none;"><button type="button" class="month">
-          Oca
+          Jan
         </button><button type="button" class="month">
-          Şub
+          Feb
         </button><button type="button" class="month">
           Mar
         </button><button type="button" class="month">
-          Nis
+          Apr
         </button><button type="button" class="month">
           May
         </button><button type="button" class="month">
-          Haz
+          Jun
         </button><button type="button" class="month">
-          Tem
+          Jul
         </button><button type="button" class="month">
-          Ağu
+          Aug
         </button><button type="button" class="month">
-          Eyl
+          Sep
         </button><button type="button" class="month">
-          Eki
+          Oct
         </button><button type="button" class="month">
-          Kas
+          Nov
         </button><button type="button" class="month">
-          Ara
+          Dec
         </button></div>
     </div>
   </div>
