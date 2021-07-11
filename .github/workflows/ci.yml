@@ -12,13 +12,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - uses: sarisia/setup-icu@v1
-        id: setup-icu
-        with:
-          noexport: true
 
       - name: Install dependencies
         run: yarn install
@@ -28,6 +21,10 @@ jobs:
 
       - name: Run linter
         run: yarn lint
+
+      - name: full-icu install
+        run: npm install -g full-icu
+        run: echo "NODE_ICU_DATA=`node-full-icu-path 2>/dev/null`" >> $GITHUB_ENV
 
       - name: Run tests
         run: yarn test:unit
