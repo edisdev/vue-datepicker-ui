@@ -23,6 +23,4 @@ jobs:
         run: yarn lint
 
       - name: Run tests
-        with:
-          node-version: '14'
         run: yarn test:unit
