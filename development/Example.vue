@@ -33,6 +33,7 @@
             :disabled-end-date="example.disabledEndDate"
             :disabled="example.disabled || false"
             :circle="example.circle || false"
+            :show-clear-button="example.showClearButton || false"
           />
           <blockquote class="exam-props">
             <textarea :value="JSON.stringify(example, null, 2)" readonly>
@@ -59,6 +60,7 @@
             :disabled-end-date="example.disabledEndDate"
             :disabled="example.disabled || false"
             :circle="example.circle || false"
+            :show-clear-button="example.showClearButton || false"
           />
           <blockquote class="exam-props">
             <textarea :value="JSON.stringify(example, null, 2)" readonly>
@@ -71,111 +73,121 @@
 </template>
 
 <script>
-import Datepicker from "../src/components/datepicker.vue";
+import Datepicker from '../src/components/datepicker.vue'
 export default {
-  name: "app",
+  name: 'app',
   components: {
-    Datepicker,
+    Datepicker
   },
-  data() {
+  data () {
     return {
       exampleCode:
         '< Datepicker  <br> v-model="example.value" <br> :range="example.range" <br> :lang="example.lang" <br> :firstDayOfWeek="example.firstDayOfWeek" <br> :input-class="example.inputClass"  <br> :position="example.position" <br> :disabled-start-date="example.disabledStartDate" <br> :text-format="example.textFormat" <br> :date-format="example.dateFormat" <br> :disabled-end-date="example.disabledEndDate"/>',
       examples: [
         {
-          title: "Single",
-          inputClass: "exampleDatePicker",
-          lang: "tr",
-          position: "bottom",
+          title: 'Single',
+          inputClass: 'exampleDatePicker',
+          lang: 'tr',
+          position: 'bottom',
           range: false,
           value: null,
-          firstDayOfWeek: "monday",
+          firstDayOfWeek: 'monday'
         },
         {
-          title: "Range",
-          inputClass: "exampleDatePicker",
-          lang: "tr",
-          position: "bottom",
+          title: 'With Clear Button',
+          inputClass: 'exampleDatePicker',
+          lang: 'tr',
+          position: 'bottom',
+          range: false,
+          showClearButton: true,
+          value: new Date(),
+          firstDayOfWeek: 'monday'
+        },
+        {
+          title: 'Range',
+          inputClass: 'exampleDatePicker',
+          lang: 'tr',
+          position: 'bottom',
           range: true,
           value: [null, null],
-          firstDayOfWeek: "monday",
+          firstDayOfWeek: 'monday'
         },
         {
-          title: "Custom lang",
-          inputClass: "exampleDatePicker",
-          lang: "en",
-          position: "right",
+          title: 'Custom lang',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'right',
           range: true,
           value: [
             new Date(),
-            new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000),
-          ],
+            new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)
+          ]
         },
         {
-          title: "First Day Of Week",
-          inputClass: "exampleDatePicker",
-          lang: "en",
-          position: "left",
+          title: 'First Day Of Week',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'left',
           range: true,
           value: [
             new Date(),
-            new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000),
+            new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)
           ],
-          firstDayOfWeek: "sunday",
+          firstDayOfWeek: 'sunday'
         },
         {
-          title: "Selected Circle",
-          inputClass: "exampleDatePicker",
-          lang: "en",
-          position: "left",
+          title: 'Selected Circle',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'left',
           range: true,
           value: [
             new Date(),
-            new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000),
+            new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)
           ],
-          firstDayOfWeek: "sunday",
-          circle: true,
+          firstDayOfWeek: 'sunday',
+          circle: true
         },
         {
-          title: "Disabled Status",
-          inputClass: "exampleDatePicker",
-          lang: "tr",
-          position: "top",
+          title: 'Disabled Status',
+          inputClass: 'exampleDatePicker',
+          lang: 'tr',
+          position: 'top',
           disabledStartDate: {
             to: new Date('01.02.2021'),
             from: new Date('02.02.2021')
           },
-          value: new Date(new Date().getTime() - 5 * 24 * 60 * 60 * 1000),
+          value: new Date(new Date().getTime() - 5 * 24 * 60 * 60 * 1000)
         },
         {
-          title: "Date Options String",
-          inputClass: "exampleDatePicker",
-          lang: "en",
-          position: "right",
-          textFormat: "long",
+          title: 'Date Options String',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'right',
+          textFormat: 'long',
+          value: new Date()
+        },
+        {
+          title: 'Showed Date Format',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'left',
           value: new Date(),
+          dateFormat: { day: '2-digit', month: '2-digit', year: 'numeric' }
         },
         {
-          title: "Showed Date Format",
-          inputClass: "exampleDatePicker",
-          lang: "en",
-          position: "left",
-          value: new Date(),
-          dateFormat: { day: "2-digit", month: "2-digit", year: "numeric" },
-        },
-        {
-          title: "Disabled Open Picker",
-          inputClass: "exampleDatePicker",
-          lang: "en",
-          position: "left",
+          title: 'Disabled Open Picker',
+          inputClass: 'exampleDatePicker',
+          lang: 'en',
+          position: 'left',
           value: new Date(),
           disabled: true,
-          dateFormat: { day: "2-digit", month: "2-digit", year: "numeric" },
-        },
-      ],
-    };
+          dateFormat: { day: '2-digit', month: '2-digit', year: 'numeric' }
+        }
+      ]
+    }
   }
-};
+}
 </script>
 
 <style>

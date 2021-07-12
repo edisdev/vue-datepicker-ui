@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with: 
+          node-version: ${{ matrix.node-version }}
+  
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Add Vue Package
+        run: yarn add --peer vue
+
+      - name: Run linter
+        run: yarn lint
+
+      - name: full-icu install
+        run: yarn global add full-icu
+  
+      - name: set NODE_ICU_DATA path
+        run: echo "NODE_ICU_DATA=`node-full-icu-path 2>/dev/null`" >> $GITHUB_ENV
+      - name: 'Echo $GITHUB_ENV'
+        run: echo "NODE_ICU_DATA=" >> $GITHUB_ENV
+
+      - name: Run tests
+        run: yarn test:unit
+      
+      - uses: actions/checkout@master
+      - uses: codecov/codecov-action@v1
+        with:
+          files: ./coverage/coverage-final.json

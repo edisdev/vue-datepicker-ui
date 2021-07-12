@@ -6,7 +6,7 @@
         <button
           type="button"
           class="viewButton"
-          @click="changeViewMode('years')"
+          @click="changeViewMode(MODE_ENUMS.YEAR)"
         >
           {{ viewButtonText }}
         </button>
@@ -43,7 +43,7 @@
         </button>
       </div>
       <div class="viewmode">
-        <div class="years" v-show="viewMode === 'years'">
+        <div class="years" v-show="viewMode === MODE_ENUMS.YEAR">
           <button
             v-for="y in years"
             :key="y.year"
@@ -55,7 +55,7 @@
             {{ y.year }}
           </button>
         </div>
-        <div class="months" v-show="viewMode === 'months'">
+        <div class="months" v-show="viewMode === MODE_ENUMS.MONTH">
           <button
             v-for="month in months"
             :key="month.index"
@@ -73,100 +73,105 @@
 </template>
 
 <script>
+import { MODE_ENUMS } from '@/utils/modes'
+
 export default {
   props: {
     calendar: {
       type: Object,
-      required: true,
+      required: true
     },
     currentDate: {
       type: Object,
-      required: true,
+      required: true
     },
     formatDate: {
       type: Function,
-      required: true,
+      required: true
     },
     selectedDate: {
-      required: true,
+      required: true
     },
     range: {
-      type: Boolean,
+      type: Boolean
     },
     textFormat: {
       type: String,
-      required: true,
+      required: true
     },
     pickerType: {
       type: String,
-      default: "start",
+      default: 'start'
     },
     circle: {
       type: Boolean,
-      default: false,
+      default: false
     },
     viewMode: {
-      type: String,
+      type: String
     },
     rangeSeperator: {
-      type: String,
+      type: String
     },
-    disableDate: {},
+    disableDate: {}
   },
   computed: {
-    selectPickerDate() {
-      if (this.range)
-        return this.pickerType === "start"
+    selectPickerDate () {
+      if (this.range) {
+        return this.pickerType === 'start'
           ? this.selectedDate[0]
-          : this.selectedDate[1];
-      else return this.selectedDate;
+          : this.selectedDate[1]
+      } else return this.selectedDate
     },
-    isDayMode() {
-      return this.viewMode === "days";
+    isDayMode () {
+      return this.viewMode === MODE_ENUMS.DAY
     },
-    yearsRange() {
-      let years = this.calendar.years;
-      return years[0] + this.rangeSeperator + years[years.length - 1];
+    yearsRange () {
+      const years = this.calendar.years
+      return years[0] + this.rangeSeperator + years[years.length - 1]
     },
-    dayViewText() {
+    MODE_ENUMS () {
+      return MODE_ENUMS
+    },
+    dayViewText () {
       return (
         this.calendar.months[this.currentDate.month].name +
-        " " +
+        ' ' +
         this.currentDate.year
-      );
+      )
     },
-    viewButtonText() {
-      let text;
+    viewButtonText () {
+      let text
       switch (this.viewMode) {
-        case "years":
-          text = this.yearsRange;
-          break;
-        case "months":
-          text = this.currentDate.year;
-          break;
+        case MODE_ENUMS.YEAR:
+          text = this.yearsRange
+          break
+        case MODE_ENUMS.MONTH:
+          text = this.currentDate.year
+          break
         default:
-          text = this.dayViewText;
+          text = this.dayViewText
       }
-      return text;
+      return text
     },
-    years() {
+    years () {
       return this.calendar.years.map((y) => {
-        let disable =
+        const disable =
           (!!this.disableDate &&
             !!this.disableDate.from &&
             new Date(this.disableDate.from).getFullYear() < y) ||
           (!!this.disableDate.to &&
-            new Date(this.disableDate.to).getFullYear() > y);
+            new Date(this.disableDate.to).getFullYear() > y)
         return {
           year: y,
-          disable,
-        };
-      });
+          disable
+        }
+      })
     },
-    months() {
-      let { year } = this.currentDate;
-      let endDate = new Date(this.disableDate.to)
-      let startDate = new Date(this.disableDate.from)
+    months () {
+      const { year } = this.currentDate
+      const endDate = new Date(this.disableDate.to)
+      const startDate = new Date(this.disableDate.from)
 
       return this.calendar.months.map((m) => {
         let disable = true
@@ -176,7 +181,7 @@ export default {
              endDate.getFullYear() >= year) ||
            (!!this.disableDate.from &&
              startDate.getMonth() > m.index &&
-             startDate.getFullYear() <= year);
+             startDate.getFullYear() <= year)
         } else {
           disable = (this.disableDate.from &&
              startDate.getMonth() < m.index &&
@@ -184,65 +189,65 @@ export default {
         }
         return {
           disable,
-          ...m,
-        };
-      });
-    },
+          ...m
+        }
+      })
+    }
   },
   methods: {
-    getDate(date) {
-      return new Date(date).setHours(0, 0, 0, 0);
+    getDate (date) {
+      return new Date(date).setHours(0, 0, 0, 0)
     },
-    isInSelectedDate(date) {
-      if (!this.range) return null;
-      let selectedDate1 = this.getDate(this.selectedDate[0]);
-      let selectedDate2 = this.getDate(this.selectedDate[1]);
-      let currentDate = this.getDate(date);
+    isInSelectedDate (date) {
+      if (!this.range) return null
+      const selectedDate1 = this.getDate(this.selectedDate[0])
+      const selectedDate2 = this.getDate(this.selectedDate[1])
+      const currentDate = this.getDate(date)
 
-      return selectedDate1 <= currentDate && selectedDate2 >= currentDate;
+      return selectedDate1 <= currentDate && selectedDate2 >= currentDate
     },
-    handlerDate(fullDate) {
-      this.$emit("handlerDate", { fullDate, picker: this.pickerType });
+    handlerDate (fullDate) {
+      this.$emit('handlerDate', { fullDate, picker: this.pickerType })
     },
-    prev() {
+    prev () {
       switch (this.viewMode) {
-        case "days":
-          this.$emit("prevMonth", this.pickerType);
-          break;
-        case "months":
-          this.$emit("setUniqYear", {
+        case MODE_ENUMS.DAY:
+          this.$emit('prevMonth', this.pickerType)
+          break
+        case MODE_ENUMS.MONTH:
+          this.$emit('setUniqYear', {
             year: this.currentDate.year - 1,
-            picker: this.pickerType,
-          });
-          break;
-        case "years":
-          this.$emit("setYears", { route: "prev", picker: this.pickerType });
+            picker: this.pickerType
+          })
+          break
+        case MODE_ENUMS.YEAR:
+          this.$emit('setYears', { route: 'prev', picker: this.pickerType })
       }
     },
-    next() {
+    next () {
       switch (this.viewMode) {
-        case "days":
-          this.$emit("nextMonth", this.pickerType);
-          break;
-        case "months":
-          this.$emit("setUniqYear", {
+        case MODE_ENUMS.DAY:
+          this.$emit('nextMonth', this.pickerType)
+          break
+        case MODE_ENUMS.MONTH:
+          this.$emit('setUniqYear', {
             year: this.currentDate.year + 1,
-            picker: this.pickerType,
-          });
-          break;
-        case "years":
-          this.$emit("setYears", { route: "next", picker: this.pickerType });
+            picker: this.pickerType
+          })
+          break
+        case MODE_ENUMS.YEAR:
+          this.$emit('setYears', { route: 'next', picker: this.pickerType })
       }
     },
-    changeViewMode(mode) {
-      this.$emit("changeViewMode", { mode, picker: this.pickerType });
+    changeViewMode (mode) {
+      this.$emit('changeViewMode', { mode, picker: this.pickerType })
     },
-    setYear(year) {
-      this.$emit("setYear", { year, picker: this.pickerType });
+    setYear (year) {
+      this.$emit('setYear', { year, picker: this.pickerType })
     },
-    setMonth(month) {
-      this.$emit("setMonth", { month, picker: this.pickerType });
-    },
-  },
-};
+    setMonth (month) {
+      this.$emit('setMonth', { month, picker: this.pickerType })
+    }
+  }
+}
 </script>
