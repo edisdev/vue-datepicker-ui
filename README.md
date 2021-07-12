@@ -1,11 +1,11 @@
 # Vue Datepicker Component
-  >A Datepicker Component For VueJs
-(https://edisdev.github.io/vue-datepicker-ui)
-
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/edisdev/vue-datepicker-ui)
 [![codecov](https://codecov.io/gh/edisdev/vue-datepicker-ui/branch/develop/graph/badge.svg?token=6VJS9RSMW8)](https://codecov.io/gh/edisdev/vue-datepicker-ui)
 ![npm](https://img.shields.io/npm/dt/vue-datepicker-ui)
 ![GitHub](https://img.shields.io/github/license/edisdev/vue-datepicker-ui)
+
+  >A Datepicker Component For VueJs
+(https://edisdev.github.io/vue-datepicker-ui)
 
 <img src="./resources/datepicker.gif" width="70%">
 <hr>
