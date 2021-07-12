@@ -1,7 +1,7 @@
 {
   "name": "vue-datepicker-ui",
   "author": "edisdev <edisdev14@gmail.com>",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "private": false,
   "main": "./lib/vuedatepickerui.umd.js",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit -u",
-    "lint": "vue-cli-service lint src/**/*.{js,vue} development/**/*.{js,vue}",
+    "lint": "vue-cli-service lint",
     "package": "vue-cli-service build NODE_ENV=production --target lib --name vuedatepickerui --entry ./src/components/datepicker.vue --dest ./lib",
     "deploy": "vue-cli-service build --dest ./docs"
   },
