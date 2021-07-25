@@ -9,7 +9,7 @@
   * @param {string} options.dateFormat.day // day format
   * @param {string} options.dateFormat.month // month format
   * @param {string} options.dateFormat.year // year format
-  * @return {String} // formated value
+  * @return {String} // formatted value
 */
 export default function (date, options = {}) {
   const { value, range, lang, dateFormat } = options
