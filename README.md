@@ -162,5 +162,5 @@ Then,
 ```
 
 ```bash
-  yarn serve
+  yarn docs:dev
 ```

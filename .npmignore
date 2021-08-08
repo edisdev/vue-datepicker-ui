@@ -1,8 +1,8 @@
 /resources
 /docs
-/development
 /public
 /.github
+/build
 
 /yarn.lock
 /package-lock.json
