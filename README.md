@@ -45,7 +45,7 @@ and
 ```
 ### Props
 ``` html
-   <Calendar 
+   <Datepicker 
     v-model="" 
     :range="" 
     :lang="" 
@@ -58,7 +58,9 @@ and
     :date-format=""
     :disabled=""
     :placeholder=""
-    :circle=""/>
+    :circle=""
+    :show-clear-button=""
+    :show-picker-inital=""/>
 ```
 
 Prop | Type | Value |  Default
@@ -77,7 +79,7 @@ disabled | Boolean | This parameter is the datepicker prevents opening | false
 placeholder | String | Input placeholder | Select Date
 circle | Boolean | This is selected are circle or area | false
 showClearButton | Boolean | This property is If there is a selected date, it allows the button used to delete this date to be displayed or not. | false
-
+showPickerInital | Booelan | Show picker for on mounted | Boolean
 
 and customize style with css variables
 
