@@ -12,7 +12,7 @@ title: 'Examples'
     <Datepicker v-model="new Date()"/>
   </template>
   ```
-  <Datepicker :value="new Date()"/>
+  <Datepicker :model-value="new Date()"/>
 
 ## range
   **Range - Default**
@@ -37,7 +37,7 @@ title: 'Examples'
   </script>
   ```
   <Datepicker
-    :value="[new Date(), new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)]"
+    :model-value="[new Date(), new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)]"
     range/>
 
 ## lang
@@ -48,7 +48,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" lang="en"/>
+  <Datepicker :model-value="new Date()" lang="en"/>
 
 ## firstDayOfWeek
 
@@ -59,7 +59,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" first-day-of-week="sunday"/>
+  <Datepicker :model-value="new Date()" first-day-of-week="sunday"/>
 
 ## inputClass
   **Added Custom Input Class**
@@ -69,7 +69,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" input-class="customInputClass"/>
+  <Datepicker :model-value="new Date()" input-class="customInputClass"/>
 
 ## position
   **Change Picker Position** (Default: 'left')
@@ -80,7 +80,7 @@ title: 'Examples'
     <Datepicker v-model="new Date()" position="left"/>
   </template>
   ```
-  <Datepicker :value="new Date()" position="left"/>
+  <Datepicker :model-value="new Date()" position="left"/>
 
   **Right**
   ```vue
@@ -89,7 +89,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" position="right"/>
+  <Datepicker :model-value="new Date()" position="right"/>
 
   **Center**
   ```vue
@@ -98,7 +98,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" position="center"/>
+  <Datepicker :model-value="new Date()" position="center"/>
   
   **Top**
   ```vue
@@ -107,7 +107,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" position="top"/>
+  <Datepicker :model-value="new Date()" position="top"/>
 
 ## disabledStartDate
   **Make disabled single date:**
@@ -135,7 +135,7 @@ title: 'Examples'
   ```
 
   <Datepicker
-    :value="new Date(new Date().getTime() - 5 * 24 * 60 * 60 * 1000)"
+    :model-value="new Date(new Date().getTime() - 5 * 24 * 60 * 60 * 1000)"
     :disabled-start-date="{
       to: new Date('08.02.2021'),
       from: new Date('10.02.2021')
@@ -175,7 +175,7 @@ title: 'Examples'
 
   <Datepicker
     range
-    :value="[new Date(),
+    :model-value="[new Date(),
             new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)]"
     :disabled-end-date="{
       to: new Date('08.02.2021'),
@@ -192,7 +192,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" text-format="long"/>
+  <Datepicker :model-value="new Date()" text-format="long"/>
 
 
 ## dateFormat
@@ -209,7 +209,7 @@ title: 'Examples'
   </template>
   ```
 
-  <Datepicker :value="new Date()" :date-format="{ day: '2-digit', month: '2-digit', year: 'numeric' }"/>
+  <Datepicker :model-value="new Date()" :date-format="{ day: '2-digit', month: '2-digit', year: 'numeric' }"/>
 
 ## disabled
   **Disable Calendar**
@@ -245,7 +245,7 @@ title: 'Examples'
 
   <Datepicker
     circle
-    :value="new Date()"/>
+    :model-value="new Date()"/>
 
 ## showClearButton
   **selected date clear**
@@ -259,7 +259,7 @@ title: 'Examples'
 
   <Datepicker
     show-clear-button
-    :value="new Date()"/>
+    :model-value="new Date()"/>
 
 ## showPickerInital
   **picker show on mount**
@@ -273,4 +273,4 @@ title: 'Examples'
 
   <Datepicker
     show-picker-inital
-    :value="new Date()"/>
+    :model-value="new Date()"/>

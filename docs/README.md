@@ -25,19 +25,19 @@ npm install vue-datepicker-ui --save
 <div class="Datepickers">
   <div class="Datepicker">
     <Datepicker
-      :value="new Date()"/>
+      :model-value="new Date()"/>
   </div>
 
   <div class="Datepicker colorfull">
     <Datepicker
       circle
-      :value="new Date()"/>
+      :model-value="new Date()"/>
   </div>
 
   <div class="Datepicker dark">
     <Datepicker
       circle
-      :value="new Date()"/>
+      :model-value="new Date()"/>
   </div>
 
   <div class="Datepicker dark">
@@ -45,7 +45,7 @@ npm install vue-datepicker-ui --save
       circle
       range
       position="center"
-      :value="[new Date(), new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)]"/>
+      :model-value="[new Date(), new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)]"/>
   </div>
   
 </div>
