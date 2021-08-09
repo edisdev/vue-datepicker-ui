@@ -3,8 +3,7 @@ import Calendar from '@/components/calendar.vue'
 
 import './datepickerExample.css';
 
-
-export default ({ Vue }) => {
-  Vue.component('Datepicker', Datepicker)
-  Vue.component('Calendar', Calendar)
+export default ({ app }) => {
+  app.component('Datepicker', Datepicker)
+  app.component('Calendar', Calendar)
 };

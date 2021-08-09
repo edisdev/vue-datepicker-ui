@@ -1,4 +1,4 @@
-const path = require('path');
+const { path } = require('@vuepress/utils')
 
 module.exports = {
   title: 'Vue Datepicker UI',
@@ -6,14 +6,6 @@ module.exports = {
   dest: 'build',
   description: 'A datepicker component for Vuejs.',
   head: [['link', { rel: 'icon', href: 'favicon.ico' }]],
-  theme: 'default-prefers-color-scheme',
-  plugins: [
-    [
-      "@mr-hope/copy-code", {
-        showInMobile: true
-      }
-    ]
-  ],
   themeConfig: {
     prefersTheme: 'dark',
     sidebar: {
@@ -40,11 +32,10 @@ module.exports = {
     docsBranch: 'dev',
     editLinks: true,
   },
-  configureWebpack: {
-    resolve: {
-      alias: {
-        '@': path.resolve('src'),
-      },
-    },
-  },
+  bundler: '@vuepress/webpack',
+  bundlerConfig: {
+    chainWebpack(config) {
+      config.resolve.alias.set('@', '../../src')
+    }
+  }
 };

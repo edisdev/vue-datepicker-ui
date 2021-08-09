@@ -5,51 +5,53 @@ import { MODE_ENUMS } from '@/utils/modes'
 import Datepicker from '@/components/datepicker.vue'
 
 describe('Datepicker', () => {
-  let wrapper
+  let wrapper = mount(Datepicker)
 
   beforeEach(() => {
     wrapper = mount(Datepicker)
   })
 
   afterEach(() => {
-    wrapper.destroy()
+    wrapper.unmount()
   })
 
   describe('Correct Picker Value', () => {
     test('is correct value setting selected date', async () => {
-      const value = new Date()
-      await wrapper.setProps({ value })
-      expect(wrapper.vm._data.selectedDate).toEqual(value)
+      const modelValue = new Date()
+      await wrapper.setProps({ modelValue })
+      expect(wrapper.vm.selectedDate).toEqual(modelValue)
     })
 
     test('is correct range value setting selected date', async () => {
-      const value = [new Date(), new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)]
-      await wrapper.setProps({ value })
-      expect(wrapper.vm._data.selectedDate).toEqual(value)
+      const modelValue = [new Date(), new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)]
+      await wrapper.setProps({ range: true })
+      await wrapper.setProps({ modelValue })
+      expect(wrapper.vm.selectedDate).toEqual(modelValue)
     })
 
     test('is correct type range value', async () => {
-      const value = [null, null]
-      await wrapper.setProps({ value })
-      expect(Array.isArray(wrapper.vm._data.selectedDate)).toEqual(true)
+      const modelValue = [null, null]
+      await wrapper.setProps({ range: true })
+      await wrapper.setProps({ modelValue })
+      expect(Array.isArray(wrapper.vm.selectedDate)).toEqual(true)
     })
   })
 
   describe('Datepicker Range Control', () => {
     beforeEach(() => {
       wrapper = mount(Datepicker, {
-        propsData: {
+        props: {
           range: true
         }
       })
     })
 
     test('selected date is array', async () => {
-      expect(Array.isArray(wrapper.vm._data.selectedDate)).toEqual(true)
+      expect(Array.isArray(wrapper.vm.selectedDate)).toEqual(true)
     })
 
     test('multi range datepicker render', async () => {
-      const dpInput = wrapper.find('.input-field input')
+      const dpInput = wrapper.find('.v-calendar .input-field > input')
       await dpInput.trigger('click')
 
       const calendars = wrapper.findAll('.calendar')
@@ -61,14 +63,14 @@ describe('Datepicker', () => {
   describe('Show Clear Button', () => {
     beforeEach(() => {
       wrapper = mount(Datepicker, {
-        propsData: {
+        props: {
           showClearButton: true
         }
       })
     })
 
     afterEach(() => {
-      wrapper.destroy()
+      wrapper.unmount()
     })
 
     test('not show when value is empty', () => {
@@ -77,26 +79,26 @@ describe('Datepicker', () => {
     })
 
     test('show when value is not empty', async () => {
-      await wrapper.setProps({ value: new Date() })
+      await wrapper.setProps({ modelValue: new Date() })
       const clearButton = wrapper.find('.clearButton')
 
       expect(clearButton.exists()).toBe(true)
     })
 
     test('clear button worked is correct', async () => {
-      await wrapper.setProps({ value: new Date() })
+      await wrapper.setProps({ modelValue: new Date() })
 
       const clearButton = wrapper.find('.clearButton')
       await clearButton.trigger('click')
 
-      expect(wrapper.vm._data.selectedDate).toEqual(null)
+      expect(wrapper.vm.selectedDate).toEqual(null)
     })
   })
 
   describe('Formatted Value', () => {
     test('is correct format', async () => {
       await wrapper.setProps({
-        value: '07.24.2021'
+        modelValue: '07.24.2021'
       })
 
       expect(wrapper.vm.formattedValue).toBe('Jul 24, 2021')
@@ -104,7 +106,7 @@ describe('Datepicker', () => {
 
     test('is correct format is range', async () => {
       await wrapper.setProps({
-        value: ['07.24.2021', '08.28.2021'],
+        modelValue: ['07.24.2021', '08.28.2021'],
         range: true
       })
 
@@ -115,7 +117,7 @@ describe('Datepicker', () => {
   describe('Prev Action', () => {
     test('prev action worked is correct', async () => {
       await wrapper.setProps({
-        value: '07.24.2021'
+        modelValue: '07.24.2021'
       })
 
       wrapper.vm.prevMonth('start')
@@ -124,7 +126,7 @@ describe('Datepicker', () => {
 
     test('prev action worked is correct for secondary calendar', async () => {
       await wrapper.setProps({
-        value: ['07.24.2021', '08.28.2021'],
+        modelValue: ['07.24.2021', '08.28.2021'],
         range: true
       })
 
@@ -134,7 +136,7 @@ describe('Datepicker', () => {
 
     test('prev action set date correct for first month', async () => {
       await wrapper.setProps({
-        value: '01.20.2021'
+        modelValue: '01.20.2021'
       })
 
       wrapper.vm.prevMonth('start')
@@ -145,7 +147,7 @@ describe('Datepicker', () => {
   describe('Next Action', () => {
     test('next action worked is correct', async () => {
       await wrapper.setProps({
-        value: '07.24.2021'
+        modelValue: '07.24.2021'
       })
 
       wrapper.vm.nextMonth('start')
@@ -154,7 +156,7 @@ describe('Datepicker', () => {
 
     test('next action worked is correct for secondary calendar', async () => {
       await wrapper.setProps({
-        value: ['07.24.2021', '08.28.2021'],
+        modelValue: ['07.24.2021', '08.28.2021'],
         range: true
       })
 
@@ -164,7 +166,7 @@ describe('Datepicker', () => {
 
     test('next action set date correct for first month', async () => {
       await wrapper.setProps({
-        value: '12.20.2020'
+        modelValue: '12.20.2020'
       })
 
       wrapper.vm.nextMonth('start')
@@ -220,14 +222,14 @@ describe('Datepicker', () => {
 
   describe('Set Years Action', () => {
     test('primary calendar prev action is correct', async () => {
-      await wrapper.setProps({ value: '07.24.2021' })
+      await wrapper.setProps({ modelValue: '07.24.2021' })
       await wrapper.vm.setYears({ route: 'prev', picker: 'start' })
 
       expect(wrapper.vm.currentDate.year).toBe(2010)
     })
 
     test('primary calendar next action is correct', async () => {
-      await wrapper.setProps({ value: '07.24.2021' })
+      await wrapper.setProps({ modelValue: '07.24.2021' })
       await wrapper.vm.setYears({ route: 'next', picker: 'start' })
 
       expect(wrapper.vm.currentDate.year).toBe(2032)
@@ -235,7 +237,7 @@ describe('Datepicker', () => {
 
     test('secondary calendar prev action is correct', async () => {
       await wrapper.setProps({
-        value: ['07.24.2021', '08.28.2021'],
+        modelValue: ['07.24.2021', '08.28.2021'],
         range: true
       })
       await wrapper.vm.setYears({ route: 'prev', picker: 'end' })
@@ -245,7 +247,7 @@ describe('Datepicker', () => {
 
     test('secondary calendar next action is correct', async () => {
       await wrapper.setProps({
-        value: ['07.24.2021', '08.28.2021'],
+        modelValue: ['07.24.2021', '08.28.2021'],
         range: true
       })
       await wrapper.vm.setYears({ route: 'next', picker: 'end' })
@@ -279,7 +281,7 @@ describe('Datepicker', () => {
     })
 
     test('was changed current date year correctly for secondary calendar', async () => {
-      await wrapper.setProps({ range: true, value: [null, null] })
+      await wrapper.setProps({ range: true, modelValue: [null, null] })
       const startDate = new Date()
       const endDate = new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)
 
@@ -306,17 +308,16 @@ describe('Datepicker', () => {
     })
 
     test('outside click event worked is correct', async () => {
-      const picker = BigWrapper.find('.v-calendar')
+      const picker = BigWrapper.findComponent('.v-calendar')
       const OtherTemplate = BigWrapper.find('#OtherTemplate')
-
-      picker.setData({ isShowPicker: true })
+      await picker.setData({ isShowPicker: true })
 
       await OtherTemplate.trigger('click')
       expect(picker.vm.isShowPicker).toBe(false)
     })
 
     test('outside click event worked is correct', async () => {
-      const picker = BigWrapper.find('.v-calendar')
+      const picker = BigWrapper.findComponent('.v-calendar')
 
       await picker.setData({ isShowPicker: true })
       const triggerTemplate = BigWrapper.find('.v-calendar .calendar .selected-field')

@@ -25,7 +25,7 @@ describe('Calender View', () => {
     })
 
     afterEach(() => {
-      wrapper.destroy()
+      wrapper.unmount()
     })
 
     test('is correct render', () => {
@@ -63,7 +63,7 @@ describe('Calender View', () => {
     test('should be called handlerDate when selected a date', async () => {
       const mockHandlerDate = jest.spyOn(wrapper.vm, 'handlerDate')
 
-      const fifthDay = wrapper.findAll('.days-selection > .days > .day').at(6)
+      const fifthDay = wrapper.findAll('.days-selection > .days > .day')[6]
       await fifthDay.trigger('click')
 
       expect(mockHandlerDate).toHaveBeenCalled()
@@ -75,7 +75,7 @@ describe('Calender View', () => {
       const viewButton = wrapper.find('.viewButton')
       await viewButton.trigger('click')
 
-      const currentYearButton = wrapper.findAll('.year').at(0)
+      const currentYearButton = wrapper.findAll('.year')[0]
       await currentYearButton.trigger('click')
 
       expect(wrapper.emitted().setYear).toEqual([[{ year: currentYear, picker: 'start' }]])
@@ -85,10 +85,10 @@ describe('Calender View', () => {
       const viewButton = wrapper.find('.viewButton')
       await viewButton.trigger('click')
 
-      const firstYear = wrapper.findAll('.year').at(0)
+      const firstYear = wrapper.findAll('.year')[0]
       await firstYear.trigger('click')
 
-      const secondMonth = wrapper.findAll('.month').at(1)
+      const secondMonth = wrapper.findAll('.month')[1]
       await secondMonth.trigger('click')
 
       expect(wrapper.emitted().setMonth).toEqual([[{ month: 1, picker: 'start' }]])

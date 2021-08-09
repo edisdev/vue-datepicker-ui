@@ -16,8 +16,7 @@
         <div
           class="day name"
           v-for="day in calendar.days"
-          :key="`${day.dayNumber}-day`"
-        >
+          :key="`${day.dayNumber}-day`">
           {{ day.name }}
         </div>
       </div>

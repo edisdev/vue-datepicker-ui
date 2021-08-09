@@ -29,3 +29,6 @@ package-lock.json
 coverage/lcov-report
 coverage/clover.xml
 coverage/lcov.info
+
+docs/.vuepress/.cache
+docs/.vuepress/.temp

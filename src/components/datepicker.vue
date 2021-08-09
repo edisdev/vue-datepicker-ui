@@ -99,8 +99,9 @@ import CalendarUI from './calendar'
 export default {
   name: 'VueDatePicker',
   components: { CalendarUI },
+  emits: ['update:modelValue', 'selectDate'],
   props: {
-    value: {},
+    modelValue: {},
     textFormat: {
       type: String,
       default: 'short'
@@ -334,12 +335,19 @@ export default {
       this.setDate(selectedDates)
     },
     setDate (selectedDates) {
-      if (typeof selectedDates === 'undefined') return
+      if (typeof selectedDates === 'undefined') {
+        this.resetDate()
+        return
+      }
       this.selectedDate = selectedDates
       this.emitInputAction()
     },
     emitInputAction () {
-      this.$emit('input', this.selectedDate)
+      if (JSON.stringify(this.modelValue) !== this.selectedDate) {
+        this.$emit('update:modelValue', this.selectedDate)
+      }
+      this.$nextTick(() => {
+      })
       if (this.range) {
         if (this.selectedDate.filter(Boolean).length === 2) this.close()
       } else {
@@ -358,36 +366,39 @@ export default {
       return this.range ? [null, null] : null
     },
     setCurrents () {
-      if (typeof this.value === 'undefined') return
+      if (typeof this.modelValue === 'undefined') {
+        this.resetDate()
+        return
+      }
       if (this.range) {
-        if (this.value[0]) {
-          this.currentDate.year = new Date(this.value[0]).getFullYear()
-          this.currentDate.month = new Date(this.value[0]).getMonth()
-          this.currentDate.date = new Date(this.value[0]).getDate()
+        if (this.modelValue[0]) {
+          this.currentDate.year = new Date(this.modelValue[0]).getFullYear()
+          this.currentDate.month = new Date(this.modelValue[0]).getMonth()
+          this.currentDate.date = new Date(this.modelValue[0]).getDate()
         }
-        if (this.value[1]) {
-          this.currentDateEnd.year = new Date(this.value[1]).getFullYear()
-          this.currentDateEnd.month = new Date(this.value[1]).getMonth()
-          this.currentDateEnd.date = new Date(this.value[1]).getDate()
+        if (this.modelValue[1]) {
+          this.currentDateEnd.year = new Date(this.modelValue[1]).getFullYear()
+          this.currentDateEnd.month = new Date(this.modelValue[1]).getMonth()
+          this.currentDateEnd.date = new Date(this.modelValue[1]).getDate()
         }
-      } else if (this.value) {
-        this.currentDate.year = new Date(this.value).getFullYear()
-        this.currentDate.month = new Date(this.value).getMonth()
-        this.currentDate.date = new Date(this.value).getDate()
+      } else if (this.modelValue) {
+        this.currentDate.year = new Date(this.modelValue).getFullYear()
+        this.currentDate.month = new Date(this.modelValue).getMonth()
+        this.currentDate.date = new Date(this.modelValue).getDate()
       }
     }
   },
   mounted () {
-    this.setDate(this.value)
+    this.setDate(this.modelValue)
     this.setCurrents()
     this.isShowPicker = this.showPickerInital
-    this.$watch('value', () => {
+    this.$watch('modelValue', () => {
       this.setCurrents()
-      this.setDate(this.value)
+      this.setDate(this.modelValue)
     })
     this.$watch('selectedDate', (value) => {
-      if (!value && this.value === value) return
-      this.$emit('change', value)
+      if (!value && this.modelValue === value) return
+      this.$emit('selectDate', value)
     })
     document.body.addEventListener('click', (e) => {
       const Datepicker = this.$el

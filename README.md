@@ -153,7 +153,7 @@ DEMO (https://edisdev.github.io/vue-datepicker-ui)
 Firstly
 
 ```bash
-  yarn add --peer vue
+  yarn add --peer vue@next
 ```
 
 Because, Vue is peer dependency.
