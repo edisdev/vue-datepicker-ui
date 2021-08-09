@@ -1,7 +1,7 @@
 {
   "name": "vue-datepicker-ui",
   "author": "edisdev <edisdev14@gmail.com>",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": false,
   "main": "./lib/vuedatepickerui.umd.js",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "calendar",
     "component"
   ],
-  "homepage": "https://github.com/edisdev/vue-datepicker-ui",
+  "homepage": "https://edisdev.github.io/vue-datepicker-ui/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/edisdev/vue-datepicker-ui.git"
