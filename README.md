@@ -15,6 +15,22 @@
 
 ### Using
 
+**Installing**
+
+for Vue 2.x
+```bash
+   yarn add vue-datepicker-ui
+
+```
+
+for Vue 3.x
+```bash
+   yarn add vue-datepicker-ui@vue3
+
+```
+
+**Import to Project**
+
 ```javascript
 // main.js file
 import VueDatepickerUi from 'vue-datepicker-ui'
@@ -65,7 +81,7 @@ and
 
 Prop | Type | Value |  Default
 ------------- | ------------- | ------------- | -------------
-value (v-model) | Object | Date or Array for range | {}
+value/modelValue (v-model) | Object | Date or Array for range | {}
 range | Boolean | - | false
 lang | String | Supports all languages / iso code language | tr
 firstDayOfWeek | String | monday or sunday | monday
