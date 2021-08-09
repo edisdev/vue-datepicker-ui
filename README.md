@@ -15,6 +15,22 @@
 
 ### Using
 
+**Installing**
+
+for Vue 2.x
+```bash
+   yarn add vue-datepicker-ui
+
+```
+
+for Vue 3.x
+```bash
+   yarn add vue-datepicker-ui@vue3
+
+```
+
+**Import to Project**
+
 ```javascript
 // main.js file
 import VueDatepickerUi from 'vue-datepicker-ui'
