@@ -495,6 +495,7 @@ export default {
   padding: 0;
   cursor: pointer;
   border: none;
+  background: transparent;
 }
 
 .v-calendar .input-field .clearButton svg {
