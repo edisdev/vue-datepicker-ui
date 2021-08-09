@@ -5,7 +5,7 @@ title: 'Examples'
 # Examples
 
 
-## value
+## value / modelValue
   **Single - Default**
   ```vue
   <template>

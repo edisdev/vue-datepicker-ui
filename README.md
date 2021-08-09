@@ -65,7 +65,7 @@ and
 
 Prop | Type | Value |  Default
 ------------- | ------------- | ------------- | -------------
-value (v-model) | Object | Date or Array for range | {}
+value/modelValue (v-model) | Object | Date or Array for range | {}
 range | Boolean | - | false
 lang | String | Supports all languages / iso code language | tr
 firstDayOfWeek | String | monday or sunday | monday

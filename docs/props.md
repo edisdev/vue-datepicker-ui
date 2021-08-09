@@ -24,7 +24,7 @@ title: 'Props'
 
 Prop | Type | Value |  Default
 ------------- | ------------- | ------------- | -------------
-value (v-model) | Object | Date or Array for range | {}
+value/modelValue (v-model) | Object | Date or Array for range | {}
 range | Boolean | - | false
 lang | String | Supports all languages / iso code language | tr
 firstDayOfWeek | String | monday or sunday | monday
@@ -41,9 +41,12 @@ showClearButton | Boolean | This property is If there is a selected date, it all
 showPickerInital | Booelan | Show picker for on mounted | false
 
 
-## value
-  Date or Array for range
-
+## value / modelValue
+  Date or Array for range.
+  
+  :::tip
+    This property is migrate `modelValue` for Vue 3.
+  :::
 ## range
   Multi picker for start date or end date
 
