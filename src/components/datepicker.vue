@@ -173,6 +173,10 @@ export default {
     showClearButton: {
       type: Boolean,
       default: false
+    },
+    showPickerInital: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -376,6 +380,7 @@ export default {
   mounted () {
     this.setDate(this.value)
     this.setCurrents()
+    this.isShowPicker = this.showPickerInital
     this.$watch('value', () => {
       this.setCurrents()
       this.setDate(this.value)
@@ -418,8 +423,8 @@ export default {
   --v-calendar-range-text-color: #7b8187;
   --v-calendar-range-radius: 100%;
   --v-calendar-day-hover-bg-color: #eaeaeb;
-  --v-calendar-day-width: 40px;
-  --v-calendar-day-height: 40px;
+  --v-calendar-day-width: 25px;
+  --v-calendar-day-height: 25px;
   --v-calendar-day-font-size: 0.9rem;
   --v-calendar-day-font-weight: 400;
   --v-calendar-day-name-font-size: 0.9rem;
@@ -490,6 +495,7 @@ export default {
   padding: 0;
   cursor: pointer;
   border: none;
+  background: transparent;
 }
 
 .v-calendar .input-field .clearButton svg {
@@ -526,6 +532,7 @@ export default {
 .v-calendar .input-field input:disabled {
   background-color: var(--v-calendar-input-bg-disable-color);
   color: var(--v-calendar-input-text-disable-color);
+  cursor: not-allowed;
 }
 
 .v-calendar .input-field svg {
@@ -665,20 +672,25 @@ export default {
 }
 
 .v-calendar .calendar .days .day {
-  margin-bottom: 3px;
-  width: var(--v-calendar-day-width);
-  height: var(--v-calendar-day-height);
+  padding: 0;
+  margin-right: 10px;
   font-size: var(--v-calendar-day-font-size);
   font-weight: var(--v-calendar-day-font-weight);
   color: var(--v-calendar-text-color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: left;
 }
 
 .v-calendar .calendar .days .day .number {
   display: flex;
-  height: inherit;
-  width: inherit;
+  width: var(--v-calendar-day-width);
+  height: var(--v-calendar-day-height);
   align-items: center;
   justify-content: center;
+  padding: 10px;
+  font-size: inherit;
 }
 
 .v-calendar .calendar .days .day.name {
@@ -722,7 +734,7 @@ export default {
   background: var(--v-calendar-range-bg-color);
 }
 
-.v-calendar .calendar .days .day:hover {
+.v-calendar .calendar .days .day:hover .number{
   background: var(--v-calendar-day-hover-bg-color);
 }
 
@@ -805,5 +817,22 @@ export default {
   border-color: transparent transparent var(--v-calendar-triangle-color)
     transparent;
   left: 0;
+}
+
+.v-calendar.center .calendar:first-child::before {
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--v-calendar-triangle-color)
+    transparent;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.v-calendar.center .content {
+  transform: translateY(5px) translateX(-50%);
+  left: 50%;
+  border-bottom-left-radius: var(--v-calendar-content-radius);
+  border-bottom-right-radius: var(--v-calendar-content-radius);
+  border-top-right-radius: var(--v-calendar-content-radius);
 }
 </style>

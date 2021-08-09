@@ -1,7 +1,7 @@
 {
   "name": "vue-datepicker-ui",
   "author": "edisdev <edisdev14@gmail.com>",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": false,
   "main": "./lib/vuedatepickerui.umd.js",
   "license": "MIT",
@@ -14,18 +14,18 @@
     "calendar",
     "component"
   ],
-  "homepage": "https://github.com/edisdev/vue-datepicker-ui",
+  "homepage": "https://edisdev.github.io/vue-datepicker-ui/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/edisdev/vue-datepicker-ui.git"
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit -u",
     "lint": "vue-cli-service lint",
     "package": "vue-cli-service build NODE_ENV=production --target lib --name vuedatepickerui --entry ./src/components/datepicker.vue --dest ./lib",
-    "deploy": "vue-cli-service build --dest ./docs"
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:serve": "vuepress serve docs"
   },
   "dependencies": {
     "calendar-data-generate": "^1.0.3"
@@ -34,6 +34,7 @@
     "vue": "^2.6.14"
   },
   "devDependencies": {
+    "@mr-hope/vuepress-plugin-copy-code": "^1.19.1",
     "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-eslint": "^3.0.0",
     "@vue/cli-plugin-unit-jest": "~4.5.0",
@@ -47,7 +48,9 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.11.1",
     "lint-staged": "^11.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.6.14",
+    "vuepress": "^1.8.2",
+    "vuepress-theme-default-prefers-color-scheme": "^2.0.0"
   },
   "eslintConfig": {
     "root": true,

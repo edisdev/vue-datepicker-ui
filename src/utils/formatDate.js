@@ -9,13 +9,13 @@
   * @param {string} options.dateFormat.day // day format
   * @param {string} options.dateFormat.month // month format
   * @param {string} options.dateFormat.year // year format
-  * @return {String} // formated value
+  * @return {String} // formatted value
 */
 export default function (date, options = {}) {
-  const { value, range, lang, dateFormat } = options
+  const { selectedDate, range, lang, dateFormat } = options
 
   if (!date) return null
-  if (range && value.filter(Boolean).length === 0) return null
+  if (range && selectedDate.filter(Boolean).length === 0) return null
   const result = new Date(date).toLocaleDateString(lang, {
     ...dateFormat
   })

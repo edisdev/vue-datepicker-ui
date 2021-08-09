@@ -27,7 +27,7 @@
         <button
           class="day"
           v-for="(mDay, index) in calendar.daysOfMonth"
-          :key="`${index}-mounthday`"
+          :key="`${index}-monthday`"
           @click="handlerDate(mDay.fullDate)"
           type="button"
           :class="[
