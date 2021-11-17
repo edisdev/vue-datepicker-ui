@@ -13,7 +13,7 @@ module.exports = {
         {
           title: 'GETTING STARTED',
           collapsable: false,
-          children: ['installation', 'using', 'props'],
+          children: ['installation', 'using', 'props', 'events'],
         },
         {
           title: 'EXAMPLES',

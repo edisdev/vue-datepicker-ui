@@ -361,6 +361,7 @@ export default {
     },
     resetDate () {
       this.selectedDate = this.defaultSelectedDate()
+      this.$emit('reset')
     },
     defaultSelectedDate () {
       return this.range ? [null, null] : null
