@@ -99,7 +99,7 @@ import CalendarUI from './calendar'
 export default {
   name: 'VueDatePicker',
   components: { CalendarUI },
-  emits: ['update:modelValue', 'selectDate'],
+  emits: ['update:modelValue', 'selectDate', 'reset'],
   props: {
     modelValue: {},
     textFormat: {
