@@ -214,7 +214,7 @@ export default {
             ? disabledDate
             : this.disabledStartDate.from
         unSelectedDate.from = disabledDate
-        unSelectedDate.to = this.disabledStartDate.from
+        unSelectedDate.to = this.disabledStartDate.to
       }
       return unSelectedDate
     },
